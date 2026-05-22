@@ -1,0 +1,162 @@
+.contenido {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.contenido h2 {
+  margin-top: 50px;
+  margin-bottom: 25px;
+  color: #333;
+}
+
+/* TITULO SALE */
+
+.titulo-sale {
+  font-size: 32px;
+  letter-spacing: 2px;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: left;
+  margin-left: 180px;
+}
+
+.titulo-sale span {
+  color: red;
+}
+
+/* PRESENTACIÓN */
+
+.imagen-presentacion {
+  width: 95%;
+  max-width: 1050px;
+  height: auto;
+  border-radius: 20px;
+  display: block;
+  margin: 0 auto 40px auto;
+}
+
+/* RESEÑAS AUTOMÁTICAS */
+
+/* RESEÑAS CON EFECTO FLOTANTE */
+
+
+
+
+
+.track-reseñas img {
+  width: 320px;
+  border-radius: 16px;
+  flex-shrink: 0;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.18);
+  animation: flotar 3s ease-in-out infinite;
+}
+
+
+/* CARDS PRODUCTOS */
+
+.card-producto {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-producto:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
+}
+
+.precio-sale {
+  color: red;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.fuego {
+  display: inline-block;
+  animation: fuegoMover 0.8s infinite alternate;
+}
+
+@keyframes fuegoMover {
+  from {
+    transform: scale(1) rotate(-5deg);
+  }
+
+  to {
+    transform: scale(1.2) rotate(5deg);
+  }
+}
+
+
+/* RESEÑAS POR GRUPOS */
+
+.slider-reseñas {
+  position: relative;
+  width: 100%;
+  min-height: 360px;
+  margin-top: 20px;
+  overflow: hidden;
+}
+
+.grupo-reseñas {
+  position: absolute;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 28px;
+  opacity: 0;
+  transform: translateY(30px) scale(0.95);
+  animation: aparecerGrupo 15s infinite;
+}
+
+.grupo-reseñas img {
+  width: 280px;
+  border-radius: 16px;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
+}
+
+.grupo-1 {
+  animation-delay: 0s;
+}
+
+.grupo-2 {
+  animation-delay: 5s;
+}
+
+.grupo-3 {
+  animation-delay: 10s;
+}
+
+@keyframes aparecerGrupo {
+  0% {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+
+  10% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  30% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  40% {
+    opacity: 0;
+    transform: translateY(-30px) scale(0.95);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-30px) scale(0.95);
+  }
+}
+
+
+.imagen-equipo {
+  width: 50%;
+  max-width: 850px;
+  border-radius: 20px;
+  display: block;
+  margin: 20px auto 50px auto;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+}

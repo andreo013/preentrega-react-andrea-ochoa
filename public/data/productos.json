@@ -1,0 +1,602 @@
+[
+  {
+    "id": 1,
+    "nombre": "Antología 1",
+    "precio": 4800,
+    "stock": 8,
+    "imagen": "/images/antologias/16.png",
+    "categoria": "antologias",
+    "destacado": true,
+    "detalle": "Antología literaria con textos seleccionados y propuestas didácticas para trabajar en el aula."
+  },
+  {
+    "id": 2,
+    "nombre": "Antología 2",
+    "precio": 5000,
+    "stock": 9,
+    "imagen": "/images/antologias/17.png",
+    "categoria": "antologias",
+    "destacado": false,
+    "detalle": "Antología literaria con textos seleccionados y propuestas didácticas para trabajar en el aula."
+  },
+  {
+    "id": 3,
+    "nombre": "Antología 3",
+    "precio": 5200,
+    "stock": 10,
+    "imagen": "/images/antologias/18.png",
+    "categoria": "antologias",
+    "destacado": false,
+    "detalle": "Antología literaria con textos seleccionados y propuestas didácticas para trabajar en el aula."
+  },
+  {
+    "id": 4,
+    "nombre": "Antología 4",
+    "precio": 5400,
+    "stock": 11,
+    "imagen": "/images/antologias/19.png",
+    "categoria": "antologias",
+    "destacado": false,
+    "detalle": "Antología literaria con textos seleccionados y propuestas didácticas para trabajar en el aula."
+  },
+  {
+    "id": 5,
+    "nombre": "Antología 5",
+    "precio": 5600,
+    "stock": 12,
+    "imagen": "/images/antologias/20.png",
+    "categoria": "antologias",
+    "destacado": false,
+    "detalle": "Antología literaria con textos seleccionados y propuestas didácticas para trabajar en el aula."
+  },
+  {
+    "id": 6,
+    "nombre": "Antología 6",
+    "precio": 5800,
+    "stock": 8,
+    "imagen": "/images/antologias/21.png",
+    "categoria": "antologias",
+    "destacado": false,
+    "detalle": "Antología literaria con textos seleccionados y propuestas didácticas para trabajar en el aula."
+  },
+  {
+    "id": 7,
+    "nombre": "Antología 7",
+    "precio": 4800,
+    "stock": 9,
+    "imagen": "/images/antologias/22.png",
+    "categoria": "antologias",
+    "destacado": false,
+    "detalle": "Antología literaria con textos seleccionados y propuestas didácticas para trabajar en el aula."
+  },
+  {
+    "id": 8,
+    "nombre": "Antología 8",
+    "precio": 5000,
+    "stock": 10,
+    "imagen": "/images/antologias/23.png",
+    "categoria": "antologias",
+    "destacado": false,
+    "detalle": "Antología literaria con textos seleccionados y propuestas didácticas para trabajar en el aula."
+  },
+  {
+    "id": 9,
+    "nombre": "Antología 9",
+    "precio": 5200,
+    "stock": 11,
+    "imagen": "/images/antologias/24.png",
+    "categoria": "antologias",
+    "destacado": false,
+    "detalle": "Antología literaria con textos seleccionados y propuestas didácticas para trabajar en el aula."
+  },
+  {
+    "id": 10,
+    "nombre": "Antología 10",
+    "precio": 5400,
+    "stock": 12,
+    "imagen": "/images/antologias/25.png",
+    "categoria": "antologias",
+    "destacado": false,
+    "detalle": "Antología literaria con textos seleccionados y propuestas didácticas para trabajar en el aula."
+  },
+  {
+    "id": 11,
+    "nombre": "Antología 11",
+    "precio": 5600,
+    "stock": 8,
+    "imagen": "/images/antologias/26.png",
+    "categoria": "antologias",
+    "destacado": false,
+    "detalle": "Antología literaria con textos seleccionados y propuestas didácticas para trabajar en el aula."
+  },
+  {
+    "id": 12,
+    "nombre": "Antología 12",
+    "precio": 5800,
+    "stock": 9,
+    "imagen": "/images/antologias/27.png",
+    "categoria": "antologias",
+    "destacado": false,
+    "detalle": "Antología literaria con textos seleccionados y propuestas didácticas para trabajar en el aula."
+  },
+  {
+    "id": 13,
+    "nombre": "Cuadernillo 1",
+    "precio": 3500,
+    "stock": 10,
+    "imagen": "/images/cuadernillos/3.png",
+    "categoria": "cuadernillos",
+    "destacado": true,
+    "detalle": "Cuadernillo de actividades para docentes, con propuestas listas para imprimir y usar en clase."
+  },
+  {
+    "id": 14,
+    "nombre": "Cuadernillo 2",
+    "precio": 3800,
+    "stock": 11,
+    "imagen": "/images/cuadernillos/4.png",
+    "categoria": "cuadernillos",
+    "destacado": false,
+    "detalle": "Cuadernillo de actividades para docentes, con propuestas listas para imprimir y usar en clase."
+  },
+  {
+    "id": 15,
+    "nombre": "Cuadernillo 3",
+    "precio": 4000,
+    "stock": 12,
+    "imagen": "/images/cuadernillos/5.png",
+    "categoria": "cuadernillos",
+    "destacado": false,
+    "detalle": "Cuadernillo de actividades para docentes, con propuestas listas para imprimir y usar en clase."
+  },
+  {
+    "id": 16,
+    "nombre": "Cuadernillo 4",
+    "precio": 4200,
+    "stock": 13,
+    "imagen": "/images/cuadernillos/6.png",
+    "categoria": "cuadernillos",
+    "destacado": false,
+    "detalle": "Cuadernillo de actividades para docentes, con propuestas listas para imprimir y usar en clase."
+  },
+  {
+    "id": 17,
+    "nombre": "Cuadernillo 5",
+    "precio": 4500,
+    "stock": 14,
+    "imagen": "/images/cuadernillos/7.png",
+    "categoria": "cuadernillos",
+    "destacado": false,
+    "detalle": "Cuadernillo de actividades para docentes, con propuestas listas para imprimir y usar en clase."
+  },
+  {
+    "id": 18,
+    "nombre": "Cuadernillo 6",
+    "precio": 4700,
+    "stock": 10,
+    "imagen": "/images/cuadernillos/8.png",
+    "categoria": "cuadernillos",
+    "destacado": false,
+    "detalle": "Cuadernillo de actividades para docentes, con propuestas listas para imprimir y usar en clase."
+  },
+  {
+    "id": 19,
+    "nombre": "Cuadernillo 7",
+    "precio": 3500,
+    "stock": 11,
+    "imagen": "/images/cuadernillos/9.png",
+    "categoria": "cuadernillos",
+    "destacado": false,
+    "detalle": "Cuadernillo de actividades para docentes, con propuestas listas para imprimir y usar en clase."
+  },
+  {
+    "id": 20,
+    "nombre": "Cuadernillo 8",
+    "precio": 3800,
+    "stock": 12,
+    "imagen": "/images/cuadernillos/10.png",
+    "categoria": "cuadernillos",
+    "destacado": false,
+    "detalle": "Cuadernillo de actividades para docentes, con propuestas listas para imprimir y usar en clase."
+  },
+  {
+    "id": 21,
+    "nombre": "Cuadernillo 9",
+    "precio": 4000,
+    "stock": 13,
+    "imagen": "/images/cuadernillos/11.png",
+    "categoria": "cuadernillos",
+    "destacado": false,
+    "detalle": "Cuadernillo de actividades para docentes, con propuestas listas para imprimir y usar en clase."
+  },
+  {
+    "id": 22,
+    "nombre": "Cuadernillo 10",
+    "precio": 4200,
+    "stock": 14,
+    "imagen": "/images/cuadernillos/12.png",
+    "categoria": "cuadernillos",
+    "destacado": false,
+    "detalle": "Cuadernillo de actividades para docentes, con propuestas listas para imprimir y usar en clase."
+  },
+  {
+    "id": 23,
+    "nombre": "Cuadernillo 11",
+    "precio": 4500,
+    "stock": 10,
+    "imagen": "/images/cuadernillos/13.png",
+    "categoria": "cuadernillos",
+    "destacado": false,
+    "detalle": "Cuadernillo de actividades para docentes, con propuestas listas para imprimir y usar en clase."
+  },
+  {
+    "id": 24,
+    "nombre": "Cuadernillo 12",
+    "precio": 4700,
+    "stock": 11,
+    "imagen": "/images/cuadernillos/14.png",
+    "categoria": "cuadernillos",
+    "destacado": false,
+    "detalle": "Cuadernillo de actividades para docentes, con propuestas listas para imprimir y usar en clase."
+  },
+  {
+    "id": 25,
+    "nombre": "Fecha Especial 1",
+    "precio": 2800,
+    "stock": 12,
+    "imagen": "/images/fechas/27.png",
+    "categoria": "fechas",
+    "destacado": false,
+    "detalle": "Material didáctico para trabajar efemérides y fechas especiales con actividades para el aula."
+  },
+  {
+    "id": 26,
+    "nombre": "Fecha Especial 2",
+    "precio": 3000,
+    "stock": 13,
+    "imagen": "/images/fechas/28.png",
+    "categoria": "fechas",
+    "destacado": true,
+    "detalle": "Material didáctico para trabajar efemérides y fechas especiales con actividades para el aula."
+  },
+  {
+    "id": 27,
+    "nombre": "Fecha Especial 3",
+    "precio": 3200,
+    "stock": 14,
+    "imagen": "/images/fechas/29.png",
+    "categoria": "fechas",
+    "destacado": false,
+    "detalle": "Material didáctico para trabajar efemérides y fechas especiales con actividades para el aula."
+  },
+  {
+    "id": 28,
+    "nombre": "Fecha Especial 4",
+    "precio": 3500,
+    "stock": 15,
+    "imagen": "/images/fechas/30.png",
+    "categoria": "fechas",
+    "destacado": false,
+    "detalle": "Material didáctico para trabajar efemérides y fechas especiales con actividades para el aula."
+  },
+  {
+    "id": 29,
+    "nombre": "Fecha Especial 5",
+    "precio": 3700,
+    "stock": 16,
+    "imagen": "/images/fechas/31.png",
+    "categoria": "fechas",
+    "destacado": false,
+    "detalle": "Material didáctico para trabajar efemérides y fechas especiales con actividades para el aula."
+  },
+  {
+    "id": 30,
+    "nombre": "Fecha Especial 6",
+    "precio": 3900,
+    "stock": 12,
+    "imagen": "/images/fechas/32.png",
+    "categoria": "fechas",
+    "destacado": false,
+    "detalle": "Material didáctico para trabajar efemérides y fechas especiales con actividades para el aula."
+  },
+  {
+    "id": 31,
+    "nombre": "Fecha Especial 7",
+    "precio": 2800,
+    "stock": 13,
+    "imagen": "/images/fechas/33.png",
+    "categoria": "fechas",
+    "destacado": false,
+    "detalle": "Material didáctico para trabajar efemérides y fechas especiales con actividades para el aula."
+  },
+  {
+    "id": 32,
+    "nombre": "Fecha Especial 8",
+    "precio": 3000,
+    "stock": 14,
+    "imagen": "/images/fechas/34.png",
+    "categoria": "fechas",
+    "destacado": false,
+    "detalle": "Material didáctico para trabajar efemérides y fechas especiales con actividades para el aula."
+  },
+  {
+    "id": 33,
+    "nombre": "Fecha Especial 9",
+    "precio": 3200,
+    "stock": 15,
+    "imagen": "/images/fechas/35.png",
+    "categoria": "fechas",
+    "destacado": false,
+    "detalle": "Material didáctico para trabajar efemérides y fechas especiales con actividades para el aula."
+  },
+  {
+    "id": 34,
+    "nombre": "Fecha Especial 10",
+    "precio": 3500,
+    "stock": 16,
+    "imagen": "/images/fechas/36.png",
+    "categoria": "fechas",
+    "destacado": false,
+    "detalle": "Material didáctico para trabajar efemérides y fechas especiales con actividades para el aula."
+  },
+  {
+    "id": 35,
+    "nombre": "Fecha Especial 11",
+    "precio": 3700,
+    "stock": 12,
+    "imagen": "/images/fechas/37.png",
+    "categoria": "fechas",
+    "destacado": false,
+    "detalle": "Material didáctico para trabajar efemérides y fechas especiales con actividades para el aula."
+  },
+  {
+    "id": 36,
+    "nombre": "Fecha Especial 12",
+    "precio": 3900,
+    "stock": 13,
+    "imagen": "/images/fechas/38.png",
+    "categoria": "fechas",
+    "destacado": false,
+    "detalle": "Material didáctico para trabajar efemérides y fechas especiales con actividades para el aula."
+  },
+  {
+    "id": 37,
+    "nombre": "Fecha Especial 13",
+    "precio": 2800,
+    "stock": 14,
+    "imagen": "/images/fechas/39.png",
+    "categoria": "fechas",
+    "destacado": false,
+    "detalle": "Material didáctico para trabajar efemérides y fechas especiales con actividades para el aula."
+  },
+  {
+    "id": 38,
+    "nombre": "Fecha Especial 14",
+    "precio": 3000,
+    "stock": 15,
+    "imagen": "/images/fechas/40.png",
+    "categoria": "fechas",
+    "destacado": false,
+    "detalle": "Material didáctico para trabajar efemérides y fechas especiales con actividades para el aula."
+  },
+  {
+    "id": 39,
+    "nombre": "Fecha Especial 15",
+    "precio": 3200,
+    "stock": 16,
+    "imagen": "/images/fechas/41.png",
+    "categoria": "fechas",
+    "destacado": false,
+    "detalle": "Material didáctico para trabajar efemérides y fechas especiales con actividades para el aula."
+  },
+  {
+    "id": 40,
+    "nombre": "Fecha Especial 16",
+    "precio": 3500,
+    "stock": 12,
+    "imagen": "/images/fechas/42.png",
+    "categoria": "fechas",
+    "destacado": false,
+    "detalle": "Material didáctico para trabajar efemérides y fechas especiales con actividades para el aula."
+  },
+  {
+    "id": 41,
+    "nombre": "Fecha Especial 17",
+    "precio": 3700,
+    "stock": 13,
+    "imagen": "/images/fechas/43.png",
+    "categoria": "fechas",
+    "destacado": false,
+    "detalle": "Material didáctico para trabajar efemérides y fechas especiales con actividades para el aula."
+  },
+  {
+    "id": 42,
+    "nombre": "Fecha Especial 18",
+    "precio": 3900,
+    "stock": 14,
+    "imagen": "/images/fechas/44.png",
+    "categoria": "fechas",
+    "destacado": false,
+    "detalle": "Material didáctico para trabajar efemérides y fechas especiales con actividades para el aula."
+  },
+  {
+    "id": 43,
+    "nombre": "Fecha Especial 19",
+    "precio": 2800,
+    "stock": 15,
+    "imagen": "/images/fechas/45.png",
+    "categoria": "fechas",
+    "destacado": false,
+    "detalle": "Material didáctico para trabajar efemérides y fechas especiales con actividades para el aula."
+  },
+  {
+    "id": 44,
+    "nombre": "Fecha Especial 20",
+    "precio": 3000,
+    "stock": 16,
+    "imagen": "/images/fechas/46.png",
+    "categoria": "fechas",
+    "destacado": false,
+    "detalle": "Material didáctico para trabajar efemérides y fechas especiales con actividades para el aula."
+  },
+  {
+    "id": 45,
+    "nombre": "Fecha Especial 21",
+    "precio": 3200,
+    "stock": 12,
+    "imagen": "/images/fechas/47.png",
+    "categoria": "fechas",
+    "destacado": false,
+    "detalle": "Material didáctico para trabajar efemérides y fechas especiales con actividades para el aula."
+  },
+  {
+    "id": 46,
+    "nombre": "Fecha Especial 22",
+    "precio": 3500,
+    "stock": 13,
+    "imagen": "/images/fechas/48.png",
+    "categoria": "fechas",
+    "destacado": false,
+    "detalle": "Material didáctico para trabajar efemérides y fechas especiales con actividades para el aula."
+  },
+  {
+    "id": 47,
+    "nombre": "Fecha Especial 23",
+    "precio": 3700,
+    "stock": 14,
+    "imagen": "/images/fechas/49.png",
+    "categoria": "fechas",
+    "destacado": false,
+    "detalle": "Material didáctico para trabajar efemérides y fechas especiales con actividades para el aula."
+  },
+  {
+    "id": 48,
+    "nombre": "Fecha Especial 24",
+    "precio": 3900,
+    "stock": 15,
+    "imagen": "/images/fechas/50.png",
+    "categoria": "fechas",
+    "destacado": false,
+    "detalle": "Material didáctico para trabajar efemérides y fechas especiales con actividades para el aula."
+  },
+  {
+    "id": 49,
+    "nombre": "Juego 1",
+    "precio": 4200,
+    "stock": 6,
+    "imagen": "/images/juegos/20.png",
+    "categoria": "juegos",
+    "destacado": true,
+    "detalle": "Juego didáctico para docentes, pensado para repasar contenidos y promover la participación en clase."
+  },
+  {
+    "id": 50,
+    "nombre": "Juego 2",
+    "precio": 4500,
+    "stock": 7,
+    "imagen": "/images/juegos/21.png",
+    "categoria": "juegos",
+    "destacado": false,
+    "detalle": "Juego didáctico para docentes, pensado para repasar contenidos y promover la participación en clase."
+  },
+  {
+    "id": 51,
+    "nombre": "Juego 3",
+    "precio": 4800,
+    "stock": 8,
+    "imagen": "/images/juegos/22.png",
+    "categoria": "juegos",
+    "destacado": false,
+    "detalle": "Juego didáctico para docentes, pensado para repasar contenidos y promover la participación en clase."
+  },
+  {
+    "id": 52,
+    "nombre": "Juego 4",
+    "precio": 5000,
+    "stock": 9,
+    "imagen": "/images/juegos/23.png",
+    "categoria": "juegos",
+    "destacado": false,
+    "detalle": "Juego didáctico para docentes, pensado para repasar contenidos y promover la participación en clase."
+  },
+  {
+    "id": 53,
+    "nombre": "Juego 5",
+    "precio": 5300,
+    "stock": 10,
+    "imagen": "/images/juegos/24.png",
+    "categoria": "juegos",
+    "destacado": false,
+    "detalle": "Juego didáctico para docentes, pensado para repasar contenidos y promover la participación en clase."
+  },
+  {
+    "id": 54,
+    "nombre": "Juego 6",
+    "precio": 5600,
+    "stock": 6,
+    "imagen": "/images/juegos/25.png",
+    "categoria": "juegos",
+    "destacado": false,
+    "detalle": "Juego didáctico para docentes, pensado para repasar contenidos y promover la participación en clase."
+  },
+  {
+    "id": 55,
+    "nombre": "Juego 7",
+    "precio": 4200,
+    "stock": 7,
+    "imagen": "/images/juegos/26.png",
+    "categoria": "juegos",
+    "destacado": false,
+    "detalle": "Juego didáctico para docentes, pensado para repasar contenidos y promover la participación en clase."
+  },
+  {
+    "id": 56,
+    "nombre": "Juego 8",
+    "precio": 4500,
+    "stock": 8,
+    "imagen": "/images/juegos/27.png",
+    "categoria": "juegos",
+    "destacado": false,
+    "detalle": "Juego didáctico para docentes, pensado para repasar contenidos y promover la participación en clase."
+  },
+  {
+    "id": 57,
+    "nombre": "Juego 9",
+    "precio": 4800,
+    "stock": 9,
+    "imagen": "/images/juegos/28.png",
+    "categoria": "juegos",
+    "destacado": false,
+    "detalle": "Juego didáctico para docentes, pensado para repasar contenidos y promover la participación en clase."
+  },
+  {
+    "id": 58,
+    "nombre": "Juego 10",
+    "precio": 5000,
+    "stock": 10,
+    "imagen": "/images/juegos/29.png",
+    "categoria": "juegos",
+    "destacado": false,
+    "detalle": "Juego didáctico para docentes, pensado para repasar contenidos y promover la participación en clase."
+  },
+  {
+    "id": 59,
+    "nombre": "Juego 11",
+    "precio": 5300,
+    "stock": 6,
+    "imagen": "/images/juegos/30.png",
+    "categoria": "juegos",
+    "destacado": false,
+    "detalle": "Juego didáctico para docentes, pensado para repasar contenidos y promover la participación en clase."
+  },
+  {
+    "id": 60,
+    "nombre": "Juego 12",
+    "precio": 5600,
+    "stock": 7,
+    "imagen": "/images/juegos/31.png",
+    "categoria": "juegos",
+    "destacado": false,
+    "detalle": "Juego didáctico para docentes, pensado para repasar contenidos y promover la participación en clase."
+  }
+]
