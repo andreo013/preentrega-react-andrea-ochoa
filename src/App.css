@@ -162,7 +162,7 @@
 }
 
 body {
-  padding-top: 180px;
+  padding-top: 130px;
 }
 
 
@@ -170,7 +170,7 @@ body {
 @media (max-width: 900px) {
 
   body {
-    padding-top: 260px;
+    padding-top: 300px;
   }
 
   .card-producto {
