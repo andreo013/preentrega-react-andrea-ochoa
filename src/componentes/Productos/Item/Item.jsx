@@ -33,7 +33,7 @@ const agregarAlCarrito = () => {
         alt={nombre}
         style={{
           width: "100%",
-          height: "180px",
+          height: "auto",
           objectFit: "cover",
           borderRadius: "8px"
         }}
