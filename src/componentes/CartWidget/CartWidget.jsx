@@ -14,7 +14,7 @@ function CartWidget() {
         fontWeight: "bold"
       }}
     >
-      🛒 {cantidadTotal}
+      🛒 Ver carrito ({cantidadTotal})
     </Link>
   );
 }
