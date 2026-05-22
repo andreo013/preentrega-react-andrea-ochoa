@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import styles from "./Header.module.css";
 import CartWidget from "../CartWidget/CartWidget";
 
@@ -24,13 +24,69 @@ function Header() {
       <nav className={styles.nav}>
 
         <div className={styles.links}>
-          <Link to="/">Inicio</Link>
-          <Link to="/antologias">Antologías</Link>
-          <Link to="/cuadernillos">Cuadernillos</Link>
-          <Link to="/fechas">Fechas Especiales</Link>
-          <Link to="/juegos">Juegos</Link>
-          <Link to="/alta-producto">Alta Producto</Link>
-          <Link to="/contacto">Contacto</Link>
+
+          <NavLink
+            to="/"
+            className={({ isActive }) =>
+              isActive ? styles.activo : ""
+            }
+          >
+            Inicio
+          </NavLink>
+
+          <NavLink
+            to="/antologias"
+            className={({ isActive }) =>
+              isActive ? styles.activo : ""
+            }
+          >
+            Antologías
+          </NavLink>
+
+          <NavLink
+            to="/cuadernillos"
+            className={({ isActive }) =>
+              isActive ? styles.activo : ""
+            }
+          >
+            Cuadernillos
+          </NavLink>
+
+          <NavLink
+            to="/fechas"
+            className={({ isActive }) =>
+              isActive ? styles.activo : ""
+            }
+          >
+            Fechas Especiales
+          </NavLink>
+
+          <NavLink
+            to="/juegos"
+            className={({ isActive }) =>
+              isActive ? styles.activo : ""
+            }
+          >
+            Juegos
+          </NavLink>
+
+          <NavLink
+            to="/alta-producto"
+            className={({ isActive }) =>
+              isActive ? styles.activo : ""
+            }
+          >
+            Alta Producto
+          </NavLink>
+
+          <NavLink
+            to="/contacto"
+            className={({ isActive }) =>
+              isActive ? styles.activo : ""
+            }
+          >
+            Contacto
+          </NavLink>
 
         </div>
 
