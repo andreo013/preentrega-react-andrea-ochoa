@@ -3,24 +3,48 @@ import ItemListContainer from "../componentes/Productos/ItemListContainer/ItemLi
 function Inicio() {
   return (
     <div className="contenido">
-    <h1 className="titulo-sale">¿Quiénes somos?</h1>
+      <h1 className="titulo-sale">¿Quiénes somos?</h1>
+
       <section className="presentacion">
         <img
-          src="\images\reseñas\Presentacion.png"
+          src="/images/reseñas/Presentacion.png"
           alt="Presentación de la tienda"
           className="imagen-presentacion"
         />
       </section>
 
- <section>
-  <h1 className="titulo-sale">Nuestro equipo</h1>
+      <section>
+        <h2 className="titulo-sale">Nuestro equipo</h2>
 
- <img
-  src="/images/equipo.png"
-  alt="Equipo Caja Didáctica"
-  className="imagen-equipo"
-/>
-</section>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            gap: "30px",
+            flexWrap: "wrap",
+            marginTop: "30px",
+            marginBottom: "40px"
+          }}
+        >
+          <img
+            src="/images/Sofia.jpeg"
+            alt="Sofia"
+            style={{ width: "260px", borderRadius: "18px" }}
+          />
+
+          <img
+            src="/images/Silvina.jpeg"
+            alt="Silvina"
+            style={{ width: "260px", borderRadius: "18px" }}
+          />
+
+          <img
+            src="/images/Eliana.jpeg"
+            alt="Eliana"
+            style={{ width: "260px", borderRadius: "18px" }}
+          />
+        </div>
+      </section>
 
       <section>
         <h1 className="titulo-sale">
