@@ -174,10 +174,10 @@ body {
   }
 
   .card-producto {
-  width: 90% !important;
-  max-width: 320px;
-  margin: 0 auto;
-}
+    width: 90% !important;
+    max-width: 320px;
+    margin: 0 auto;
+  }
 
   .contenido {
     padding: 25px 10px;
@@ -197,8 +197,12 @@ body {
 
   .grupo-reseñas {
     position: static;
+    width: 100%;
+    display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 30px;
+    margin-bottom: 30px;
     opacity: 1;
     transform: none;
     animation: none;
@@ -207,6 +211,8 @@ body {
   .grupo-reseñas img {
     width: 85%;
     max-width: 300px;
+    border-radius: 16px;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
   }
 
   .slider-reseñas {
@@ -214,6 +220,7 @@ body {
     overflow: visible;
   }
 }
+
 
 html,
 body {
