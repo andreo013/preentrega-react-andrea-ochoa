@@ -164,3 +164,58 @@
 body {
   padding-top: 180px;
 }
+
+
+
+@media (max-width: 900px) {
+
+  body {
+    padding-top: 260px;
+  }
+
+  .card-producto {
+  width: 90% !important;
+  max-width: 320px;
+  margin: 0 auto;
+}
+
+  .contenido {
+    padding: 25px 10px;
+  }
+
+  .titulo-sale {
+    font-size: 34px;
+    text-align: center;
+    margin-left: 0;
+    letter-spacing: 1px;
+  }
+
+  .imagen-presentacion {
+    width: 95%;
+    max-width: 100%;
+  }
+
+  .grupo-reseñas {
+    position: static;
+    flex-direction: column;
+    align-items: center;
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+
+  .grupo-reseñas img {
+    width: 85%;
+    max-width: 300px;
+  }
+
+  .slider-reseñas {
+    min-height: auto;
+    overflow: visible;
+  }
+}
+
+html,
+body {
+  overflow-x: hidden;
+}
