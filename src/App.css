@@ -179,6 +179,11 @@ body {
     margin: 0 auto;
   }
 
+    .card-producto img {
+    width: 90%;
+    max-width: 260px;
+  }
+
   .contenido {
     padding: 25px 10px;
   }
