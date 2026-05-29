@@ -1,6 +1,8 @@
 import { useEffect, useState, useContext } from "react";
 import { useParams, Link } from "react-router-dom";
 import { CartContext } from "../../../context/CartContext";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../../../firebase/config";
 
 function ItemDetalle() {
   const { id } = useParams();
@@ -8,101 +10,114 @@ function ItemDetalle() {
   const { addToCart } = useContext(CartContext);
 
   useEffect(() => {
-    fetch("/data/productos.json")
-      .then((respuesta) => respuesta.json())
-      .then((datos) => {
-        const productoEncontrado = datos.find(
-          (prod) => prod.id === Number(id)
-        );
+    const productoRef = doc(db, "productos", id);
 
-        setProducto(productoEncontrado);
+    getDoc(productoRef)
+      .then((resp) => {
+        if (resp.exists()) {
+          setProducto({
+            id: resp.id,
+            ...resp.data()
+          });
+        } else {
+          setProducto(false);
+        }
       })
-      .catch((error) => console.log("Error al cargar producto:", error));
+      .catch((error) => {
+        console.log("Error al cargar producto:", error);
+      });
   }, [id]);
 
-  if (!producto) {
+  if (producto === null) {
     return <p>Cargando producto...</p>;
+  }
+
+  if (producto === false) {
+    return <p>Producto no encontrado.</p>;
   }
 
   const agregarAlCarrito = () => {
     addToCart(producto, 1);
   };
 
-
   const rutasCategorias = {
-  antologias: "/antologias",
-  cuadernillos: "/cuadernillos",
-  fechas: "/fechas",
-  juegos: "/juegos"
-};
+    antologias: "/antologias",
+    cuadernillos: "/cuadernillos",
+    fechas: "/fechas",
+    juegos: "/juegos"
+  };
 
-const nombresCategorias = {
-  antologias: "Antologías",
-  cuadernillos: "Cuadernillos",
-  fechas: "Fechas Especiales",
-  juegos: "Juegos"
-};
+  const nombresCategorias = {
+    antologias: "Antologías",
+    cuadernillos: "Cuadernillos",
+    fechas: "Fechas Especiales",
+    juegos: "Juegos"
+  };
 
-const rutaVolver = rutasCategorias[producto.categoria] || "/";
-const nombreVolver = nombresCategorias[producto.categoria] || "Inicio";
-
-
-
+  const rutaVolver = rutasCategorias[producto.categoria] || "/";
+  const nombreVolver = nombresCategorias[producto.categoria] || "Inicio";
 
   return (
     <div className="contenido">
       <Link
-  to={rutaVolver}
+        to={rutaVolver}
+        style={{
+          display: "inline-block",
+          marginBottom: "20px",
+          textDecoration: "none",
+          color: "#7c4dff",
+          fontWeight: "bold"
+        }}
+      >
+        ← Volver a {nombreVolver}
+      </Link>
+
+      <div
+        style={{
+          textAlign: "center"
+        }}
+      >
+        <img
+          src={producto.imagen}
+          alt={producto.nombre}
+          style={{
+            width: "300px",
+            maxWidth: "90%",
+            borderRadius: "12px",
+            marginBottom: "20px"
+          }}
+        />
+
+
+
+<p
   style={{
-    display: "inline-block",
-    marginBottom: "20px",
-    textDecoration: "none",
-    color: "#7c4dff",
-    fontWeight: "bold"
+    fontSize: "22px",
+    fontWeight: "bold",
+    marginBottom: "10px"
   }}
 >
-  ← Volver a {nombreVolver}
-</Link>
+  $ {producto.precio} ARS
+</p>
 
-      <h1>{producto.nombre}</h1>
+<p style={{ marginBottom: "15px" }}>
+  {producto.detalle}
+</p>
 
-      <img
-        src={producto.imagen}
-        alt={producto.nombre}
-        style={{
-          width: "300px",
-          borderRadius: "12px",
-          marginBottom: "20px"
-        }}
-      />
-
-      <p
-        style={{
-          fontSize: "22px",
-          fontWeight: "bold",
-          marginBottom: "10px"
-        }}
-      >
-        $ {producto.precio} ARS
-      </p>
-
-      <p style={{ marginBottom: "15px" }}>
-        {producto.detalle}
-      </p>
-
-      <button
-        onClick={agregarAlCarrito}
-        style={{
-          backgroundColor: "#7c4dff",
-          color: "white",
-          border: "none",
-          borderRadius: "6px",
-          padding: "10px 14px",
-          cursor: "pointer"
-        }}
-      >
-        Agregar al carrito
-      </button>
+        <button
+          onClick={agregarAlCarrito}
+          style={{
+            backgroundColor: "#7c4dff",
+            color: "white",
+            border: "none",
+            borderRadius: "6px",
+            padding: "10px 14px",
+            cursor: "pointer"
+          }}
+        >
+          Agregar al carrito
+        </button>
+      </div>
     </div>
   );
 }
