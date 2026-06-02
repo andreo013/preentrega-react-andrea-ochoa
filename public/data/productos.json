@@ -598,5 +598,18 @@
     "categoria": "juegos",
     "destacado": false,
     "detalle": "Juego didáctico para docentes, pensado para repasar contenidos y promover la participación en clase."
-  }
+  },
+
+  {
+  "id": 15,
+  "nombre": "Juego 15",
+  "precio": 5800,
+  "stock": 12,
+  "imagen": "/images/juegos/32.png",
+  "categoria": "juegos",
+  "destacado": false,
+  "detalle": "Juego didáctico para docentes y estudiantes. Incluye fichas e instrucciones para trabajar verboides de manera lúdica en el aula."
+}
+
+
 ]
