@@ -79,6 +79,18 @@ function Header() {
             Alta Producto
           </NavLink>
 
+
+          <NavLink
+            to="/admin/cupones"
+            className={({ isActive }) =>
+              isActive ? styles.activo : ""
+            }
+          >
+            Cupones
+          </NavLink>
+
+
+
           <NavLink
             to="/contacto"
             className={({ isActive }) =>

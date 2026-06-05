@@ -10,6 +10,7 @@ import Juegos from "./paginas/juegos";
 import Contacto from "./paginas/contacto";
 import Gestion from "./componentes/Gestion/Gestion";
 import Carrito from "./paginas/carrito";
+import GestionCupones from "./componentes/GestionCupones/GestionCupones";
 
 function App() {
   return (
@@ -59,6 +60,9 @@ function App() {
 
         <Route path="carrito" element={<Carrito />} />
 
+        <Route
+          path="admin/cupones" element={<GestionCupones />}
+        />
 
 
       </Route>
