@@ -1,20 +1,21 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
-import { useContext } from "react";
 import { CartContext } from "../../../context/CartContext";
 
 function Item({ producto, oferta }) {
   const { id, nombre, precio, stock, imagen } = producto;
 
   const [cantidad, setCantidad] = useState(0);
-  const { addToCart } = useContext(CartContext);
+  const { addToCart, getCantidadActual } = useContext(CartContext);
 
-const agregarAlCarrito = () => {
-  if (cantidad > 0) {
-    addToCart(producto, cantidad);
-    setCantidad(0);
-  }
-};
+  const cantidadActual = getCantidadActual(id);
+
+  const agregarAlCarrito = () => {
+    if (cantidad > 0) {
+      addToCart(producto, cantidad);
+      setCantidad(0);
+    }
+  };
 
   return (
     <div
@@ -51,6 +52,12 @@ const agregarAlCarrito = () => {
 
       <p>Stock: {stock}</p>
 
+      {cantidadActual > 0 && (
+        <p style={{ color: "#7c4dff", fontWeight: "bold" }}>
+          En carrito: {cantidadActual}
+        </p>
+      )}
+
       <div
         style={{
           display: "flex",
@@ -65,17 +72,17 @@ const agregarAlCarrito = () => {
 
         <span>{cantidad}</span>
 
-       <button
-  onClick={() => {
-    if (cantidad < stock) {
-      setCantidad(cantidad + 1);
-    } else {
-      alert("No hay más stock disponible");
-    }
-  }}
->
-  +
-</button>
+        <button
+          onClick={() => {
+            if (cantidad + cantidadActual < stock) {
+              setCantidad(cantidad + 1);
+            } else {
+              alert("No hay más stock disponible");
+            }
+          }}
+        >
+          +
+        </button>
       </div>
 
       <button

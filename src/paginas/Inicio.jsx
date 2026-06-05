@@ -1,4 +1,5 @@
 import ItemListContainer from "../componentes/Productos/ItemListContainer/ItemListContainer";
+import Equipo from "../componentes/Equipo/Equipo";
 
 function Inicio() {
   return (
@@ -13,38 +14,7 @@ function Inicio() {
         />
       </section>
 
-      <section>
-        <h2 className="titulo-sale">Nuestro equipo</h2>
-
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            gap: "30px",
-            flexWrap: "wrap",
-            marginTop: "30px",
-            marginBottom: "40px"
-          }}
-        >
-          <img
-            src="/images/Sofia.jpeg"
-            alt="Sofia"
-            style={{ width: "260px", borderRadius: "18px" }}
-          />
-
-          <img
-            src="/images/Silvina.jpeg"
-            alt="Silvina"
-            style={{ width: "260px", borderRadius: "18px" }}
-          />
-
-          <img
-            src="/images/Eliana.jpeg"
-            alt="Eliana"
-            style={{ width: "260px", borderRadius: "18px" }}
-          />
-        </div>
-      </section>
+     <Equipo />
 
       <section>
         <h1 className="titulo-sale">

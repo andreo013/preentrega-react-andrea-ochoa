@@ -90,19 +90,19 @@ function ItemDetalle() {
 
 
 
-<p
-  style={{
-    fontSize: "22px",
-    fontWeight: "bold",
-    marginBottom: "10px"
-  }}
->
-  $ {producto.precio} ARS
-</p>
+        <p
+          style={{
+            fontSize: "22px",
+            fontWeight: "bold",
+            marginBottom: "10px"
+          }}
+        >
+          $ {producto.precio} ARS
+        </p>
 
-<p style={{ marginBottom: "15px" }}>
-  {producto.detalle}
-</p>
+        <p style={{ marginBottom: "15px" }}>
+          {producto.detalle}
+        </p>
 
         <button
           onClick={agregarAlCarrito}

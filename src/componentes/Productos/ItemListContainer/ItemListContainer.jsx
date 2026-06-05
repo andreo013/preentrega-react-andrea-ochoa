@@ -28,18 +28,18 @@ function ItemListContainer({ mensaje, categoria, destacados, oferta }) {
           );
         }
 
-productosFirebase.sort((a, b) => {
-  const numA = parseInt(a.nombre?.match(/\d+/)?.[0] || 0);
-  const numB = parseInt(b.nombre?.match(/\d+/)?.[0] || 0);
+        productosFirebase.sort((a, b) => {
+          const numA = parseInt(a.nombre?.match(/\d+/)?.[0] || 0);
+          const numB = parseInt(b.nombre?.match(/\d+/)?.[0] || 0);
 
-  return numA - numB;
-});
+          return numA - numB;
+        });
 
-console.table(productosFirebase.map((p) => ({
-  nombre: p.nombre,
-  categoria: p.categoria,
-  imagen: p.imagen
-})));
+        console.table(productosFirebase.map((p) => ({
+          nombre: p.nombre,
+          categoria: p.categoria,
+          imagen: p.imagen
+        })));
 
         setProductos(productosFirebase);
       })

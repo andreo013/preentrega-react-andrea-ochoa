@@ -29,30 +29,70 @@ function CartProvider({ children }) {
     }
   };
 
+  const getCantidadActual = (productId) => {
+    const item = carrito.find((item) => item.id === productId);
+    return item ? item.cantidad : 0;
+  };
+
+  const removeItem = (productId) => {
+    const carritoActualizado = carrito.filter(
+      (item) => item.id !== productId
+    );
+
+    setCarrito(carritoActualizado);
+  };
+
+  const restarItem = (productId) => {
+    const itemEncontrado = carrito.find(
+      (item) => item.id === productId
+    );
+
+    if (itemEncontrado.cantidad > 1) {
+      const carritoActualizado = carrito.map((item) =>
+        item.id === productId
+          ? { ...item, cantidad: item.cantidad - 1 }
+          : item
+      );
+
+      setCarrito(carritoActualizado);
+    } else {
+      removeItem(productId);
+    }
+  };
+
+  const isInCart = (productId) => {
+    return carrito.some((item) => item.id === productId);
+  };
+
+  const clearCart = () => {
+    setCarrito([]);
+  };
+
+  const getCartTotal = () => {
+    return carrito.reduce(
+      (acc, item) => acc + item.precio * item.cantidad,
+      0
+    );
+  };
+
   const cantidadTotal = carrito.reduce(
     (acc, item) => acc + item.cantidad,
     0
   );
 
-const removeFromCart = (id) => {
-  const carritoActualizado = carrito.filter(
-    (item) => item.id !== id
-  );
-
-  setCarrito(carritoActualizado);
-};
-
-
-
-
   return (
     <CartContext.Provider
       value={{
-  carrito,
-  addToCart,
-  removeFromCart,
-  cantidadTotal
-}}
+        carrito,
+        addToCart,
+        getCantidadActual,
+        removeItem,
+        restarItem,
+        isInCart,
+        clearCart,
+        getCartTotal,
+        cantidadTotal
+      }}
     >
       {children}
     </CartContext.Provider>
