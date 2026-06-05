@@ -8,16 +8,16 @@ function Equipo() {
   useEffect(() => {
     const equipoCollection = collection(db, "equipo");
 
- getDocs(equipoCollection).then((resp) => {
-  const integrantes = resp.docs.map((doc) => ({
-    id: doc.id,
-    ...doc.data()
-  }));
+    getDocs(equipoCollection).then((resp) => {
+      const integrantes = resp.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data()
+      }));
 
-  integrantes.sort((a, b) => a.orden - b.orden);
+      integrantes.sort((a, b) => a.orden - b.orden);
 
-  setEquipo(integrantes);
-});
+      setEquipo(integrantes);
+    });
   }, []);
 
   return (
@@ -35,11 +35,11 @@ function Equipo() {
         }}
       >
         {equipo.map((integrante) => (
-          <a
+          <div
             key={integrante.id}
-            href={integrante.linkedinURL}
-            target="_blank"
-            rel="noreferrer"
+            style={{
+              textAlign: "center"
+            }}
           >
             <img
               src={integrante.fotoURL}
@@ -47,7 +47,24 @@ function Equipo() {
               title={`${integrante.nombre} - ${integrante.rol}`}
               style={{ width: "260px", borderRadius: "18px" }}
             />
-          </a>
+
+            <br />
+
+            <a
+              href={integrante.linkedinURL}
+              target="_blank"
+              rel="noreferrer"
+              style={{
+                display: "inline-block",
+                marginTop: "10px",
+                color: "#7c4dff",
+                textDecoration: "none",
+                fontWeight: "bold"
+              }}
+            >
+              Ver LinkedIn
+            </a>
+          </div>
         ))}
       </div>
     </section>
