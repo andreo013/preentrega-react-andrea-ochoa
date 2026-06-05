@@ -8,7 +8,7 @@ import Cuadernillos from "./paginas/cuadernillos";
 import Fechas from "./paginas/fechas";
 import Juegos from "./paginas/juegos";
 import Contacto from "./paginas/contacto";
-import FormularioAltaProductoContainer from "./componentes/FormularioAltaProducto/FormularioAltaProductoContainer";
+import Gestion from "./componentes/Gestion/Gestion";
 import Carrito from "./paginas/carrito";
 
 function App() {
@@ -42,10 +42,10 @@ function App() {
           }
         />
 
-       <Route
-  path="alta-producto"
-  element={<FormularioAltaProductoContainer />}
-/>
+        <Route
+          path="alta-producto"
+          element={<Gestion />}
+        />
 
         <Route path="antologias" element={<Antologias />} />
 

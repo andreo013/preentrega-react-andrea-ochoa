@@ -20,18 +20,18 @@ function FormularioAltaProducto({
   return (
     <form style={formStyle} onSubmit={manejarEnvio}>
 
-<h3>Agregar Nuevo Producto</h3>
+      <h3>Agregar Nuevo Producto</h3>
 
-<p
-  style={{
-    fontSize: "14px",
-    color: "#666",
-    marginTop: "-5px",
-    marginBottom: "10px"
-  }}
->
-  Formulario de carga administrativa. Los datos se muestran como vista previa del nuevo material.
-</p>
+      <p
+        style={{
+          fontSize: "14px",
+          color: "#666",
+          marginTop: "-5px",
+          marginBottom: "10px"
+        }}
+      >
+        Formulario de carga administrativa. Los datos se muestran como vista previa del nuevo material.
+      </p>
 
 
       <div>
@@ -63,6 +63,31 @@ function FormularioAltaProducto({
           name="stock"
           placeholder="Ej: 10"
           value={datosForm.stock}
+          onChange={manejarCambio}
+        />
+      </div>
+
+      <div>
+        <label>Categoría:</label>
+        <select
+          name="categoria"
+          value={datosForm.categoria}
+          onChange={manejarCambio}
+        >
+          <option value="">Seleccionar categoría</option>
+          <option value="antologias">Antologías</option>
+          <option value="cuadernillos">Cuadernillos</option>
+          <option value="fechas">Fechas Especiales</option>
+          <option value="juegos">Juegos</option>
+        </select>
+      </div>
+
+      <div>
+        <label>Detalle:</label>
+        <textarea
+          name="detalle"
+          placeholder="Descripción breve del material"
+          value={datosForm.detalle}
           onChange={manejarCambio}
         />
       </div>

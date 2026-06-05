@@ -1,11 +1,15 @@
 import { useState } from "react";
+import { collection, addDoc } from "firebase/firestore";
+import { db } from "../../firebase/config";
 import FormularioAltaProducto from "./FormularioAltaProducto";
 
 function FormularioAltaProductoContainer() {
   const [datosForm, setDatosForm] = useState({
     nombre: "",
     precio: "",
-    stock: ""
+    stock: "",
+    categoria: "",
+    detalle: ""
   });
 
   const [imagenFile, setImagenFile] = useState(null);
@@ -36,6 +40,11 @@ function FormularioAltaProductoContainer() {
   const manejarEnvio = async (e) => {
     e.preventDefault();
 
+    alert("Entró al submit");
+
+
+
+
     if (!imagenFile) {
       setMensaje("⚠️ Seleccioná una imagen");
       setTimeout(() => setMensaje(""), 3000);
@@ -44,7 +53,7 @@ function FormularioAltaProductoContainer() {
 
     setLoading(true);
 
-    const apiKey = import.meta.env.VITE_IMGBB_API_KEY;                                  
+    const apiKey = import.meta.env.VITE_IMGBB_API_KEY;
 
     const formData = new FormData();
     formData.append("image", imagenFile);
@@ -65,28 +74,47 @@ function FormularioAltaProductoContainer() {
       }
 
       const productoCompleto = {
-        ...datosForm,
-        urlImagen: data.data.url
+        nombre: datosForm.nombre,
+        precio: Number(datosForm.precio),
+        stock: Number(datosForm.stock),
+        categoria: datosForm.categoria,
+        detalle: datosForm.detalle,
+        imagen: data.data.url,
+        destacado: false,
+        oferta: false
       };
 
-      console.log("Producto completo:", productoCompleto);
+      const productosCollection = collection(db, "productos");
 
-      setProductoGuardado(productoCompleto);
+      const docRef = await addDoc(productosCollection, productoCompleto);
+
+
+
+
+
+      const productoConId = {
+        id: docRef.id,
+        ...productoCompleto
+      };
+
+      setProductoGuardado(productoConId);
 
       setDatosForm({
         nombre: "",
         precio: "",
-        stock: ""
+        stock: "",
+        categoria: "",
+        detalle: ""
       });
 
       setImagenFile(null);
       setPreview(null);
 
-      setMensaje("Material guardado correctamente ✔");
+      setMensaje("Material guardado correctamente en Firebase ✔");
       setTimeout(() => setMensaje(""), 3000);
     } catch (error) {
       console.error(error);
-      setMensaje("❌ Error al subir la imagen");
+      setMensaje("❌ Error al guardar el producto");
       setTimeout(() => setMensaje(""), 3000);
     } finally {
       setLoading(false);
@@ -120,7 +148,7 @@ function FormularioAltaProductoContainer() {
             }}
           >
             <img
-              src={productoGuardado.urlImagen}
+              src={productoGuardado.imagen}
               alt={productoGuardado.nombre}
               style={{
                 width: "100%",
@@ -133,6 +161,7 @@ function FormularioAltaProductoContainer() {
             <h3>{productoGuardado.nombre}</h3>
             <p><strong>${productoGuardado.precio}</strong></p>
             <p>Stock: {productoGuardado.stock}</p>
+            <p>Categoría: {productoGuardado.categoria}</p>
           </div>
         </div>
       )}

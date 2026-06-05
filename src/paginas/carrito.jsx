@@ -3,13 +3,13 @@ import { Link } from "react-router-dom";
 import { CartContext } from "../context/CartContext";
 
 function Carrito() {
- const {
-  carrito,
-  removeItem,
-  restarItem,
-  clearCart,
-  getCartTotal
-} = useContext(CartContext);
+  const {
+    carrito,
+    removeItem,
+    restarItem,
+    clearCart,
+    getCartTotal
+  } = useContext(CartContext);
 
   if (carrito.length === 0) {
     return (
@@ -45,42 +45,42 @@ function Carrito() {
           <p>Precio: $ {producto.precio} ARS</p>
           <p>Subtotal: $ {producto.precio * producto.cantidad} ARS</p>
 
-         <div
-  style={{
-    display: "flex",
-    gap: "10px",
-    justifyContent: "center",
-    marginTop: "10px"
-  }}
->
-  <button
-    onClick={() => restarItem(producto.id)}
-    style={{
-      backgroundColor: "#ffa726",
-      color: "white",
-      border: "none",
-      borderRadius: "6px",
-      padding: "8px 12px",
-      cursor: "pointer"
-    }}
-  >
-    Quitar 1
-  </button>
+          <div
+            style={{
+              display: "flex",
+              gap: "10px",
+              justifyContent: "center",
+              marginTop: "10px"
+            }}
+          >
+            <button
+              onClick={() => restarItem(producto.id)}
+              style={{
+                backgroundColor: "#ffa726",
+                color: "white",
+                border: "none",
+                borderRadius: "6px",
+                padding: "8px 12px",
+                cursor: "pointer"
+              }}
+            >
+              Quitar 1
+            </button>
 
-  <button
-    onClick={() => removeItem(producto.id)}
-    style={{
-      backgroundColor: "#ff4d4d",
-      color: "white",
-      border: "none",
-      borderRadius: "6px",
-      padding: "8px 12px",
-      cursor: "pointer"
-    }}
-  >
-    Eliminar
-  </button>
-</div>
+            <button
+              onClick={() => removeItem(producto.id)}
+              style={{
+                backgroundColor: "#ff4d4d",
+                color: "white",
+                border: "none",
+                borderRadius: "6px",
+                padding: "8px 12px",
+                cursor: "pointer"
+              }}
+            >
+              Eliminar
+            </button>
+          </div>
         </div>
       ))}
 
@@ -103,7 +103,10 @@ function Carrito() {
 
       <Link
         to="/"
-        onClick={() => alert("Gracias por comprar")}
+        onClick={() => {
+          alert("Gracias por comprar");
+          clearCart();
+        }}
         style={{
           backgroundColor: "#7c4dff",
           color: "white",
