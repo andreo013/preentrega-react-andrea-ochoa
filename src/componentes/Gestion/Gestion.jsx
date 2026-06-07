@@ -5,29 +5,39 @@ import FormularioAltaProductoContainer from "../FormularioAltaProducto/Formulari
 
 function Gestion() {
   const [productos, setProductos] = useState([]);
+  const [productoAEditar, setProductoAEditar] = useState(null);
+
+  const obtenerProductos = async () => {
+    const productosRef = collection(db, "productos");
+    const resp = await getDocs(productosRef);
+
+    const productosFirebase = resp.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data()
+    }));
+
+    productosFirebase.sort((a, b) => {
+      const numA = parseInt(a.nombre?.match(/\d+/)?.[0] || 0);
+      const numB = parseInt(b.nombre?.match(/\d+/)?.[0] || 0);
+
+      return numA - numB;
+    });
+
+    setProductos(productosFirebase);
+  };
 
   useEffect(() => {
-    const obtenerProductos = async () => {
-      const productosRef = collection(db, "productos");
-      const resp = await getDocs(productosRef);
-
-      const productosFirebase = resp.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data()
-      }));
-
-      productosFirebase.sort((a, b) => {
-        const numA = parseInt(a.nombre?.match(/\d+/)?.[0] || 0);
-        const numB = parseInt(b.nombre?.match(/\d+/)?.[0] || 0);
-
-        return numA - numB;
-      });
-
-      setProductos(productosFirebase);
-    };
-
     obtenerProductos();
   }, []);
+
+  const handleEditClick = (producto) => {
+    setProductoAEditar(producto);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const cancelarEdicion = () => {
+    setProductoAEditar(null);
+  };
 
   const handleDelete = async (id) => {
     const confirmacion = window.confirm(
@@ -49,7 +59,11 @@ function Gestion() {
     <div className="contenido">
       <h1>Gestión de productos</h1>
 
-      <FormularioAltaProductoContainer />
+      <FormularioAltaProductoContainer
+        productoAEditar={productoAEditar}
+        cancelarEdicion={cancelarEdicion}
+        actualizarListado={obtenerProductos}
+      />
 
       <hr />
 
@@ -59,6 +73,21 @@ function Gestion() {
         {productos.map((prod) => (
           <li key={prod.id} style={{ marginBottom: "8px" }}>
             {prod.nombre} - ${prod.precio}
+
+            <button
+              onClick={() => handleEditClick(prod)}
+              style={{
+                marginLeft: "10px",
+                backgroundColor: "#7c4dff",
+                color: "white",
+                border: "none",
+                borderRadius: "6px",
+                padding: "5px 8px",
+                cursor: "pointer"
+              }}
+            >
+              Editar
+            </button>
 
             <button
               onClick={() => handleDelete(prod.id)}

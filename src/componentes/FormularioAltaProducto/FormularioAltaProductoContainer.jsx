@@ -1,22 +1,47 @@
-import { useState } from "react";
-import { collection, addDoc } from "firebase/firestore";
+import { useEffect, useState } from "react";
+import { collection, addDoc, doc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase/config";
 import FormularioAltaProducto from "./FormularioAltaProducto";
 
-function FormularioAltaProductoContainer() {
-  const [datosForm, setDatosForm] = useState({
-    nombre: "",
-    precio: "",
-    stock: "",
-    categoria: "",
-    detalle: ""
-  });
+const estadoInicialForm = {
+  nombre: "",
+  precio: "",
+  stock: "",
+  categoria: "",
+  detalle: "",
+  imagen: ""
+};
 
+function FormularioAltaProductoContainer({
+  productoAEditar,
+  cancelarEdicion,
+  actualizarListado
+}) {
+  const [datosForm, setDatosForm] = useState(estadoInicialForm);
   const [imagenFile, setImagenFile] = useState(null);
   const [preview, setPreview] = useState(null);
   const [productoGuardado, setProductoGuardado] = useState(null);
   const [loading, setLoading] = useState(false);
   const [mensaje, setMensaje] = useState("");
+
+  useEffect(() => {
+    if (productoAEditar) {
+      setDatosForm({
+        nombre: productoAEditar.nombre || "",
+        precio: productoAEditar.precio || "",
+        stock: productoAEditar.stock || "",
+        categoria: productoAEditar.categoria || "",
+        detalle: productoAEditar.detalle || "",
+        imagen: productoAEditar.imagen || ""
+      });
+
+      setPreview(null);
+      setImagenFile(null);
+      setProductoGuardado(null);
+    } else {
+      setDatosForm(estadoInicialForm);
+    }
+  }, [productoAEditar]);
 
   const manejarCambio = (e) => {
     const { name, value } = e.target;
@@ -37,15 +62,51 @@ function FormularioAltaProductoContainer() {
     }
   };
 
+  const validarFormulario = () => {
+    if (datosForm.nombre.trim() === "") {
+      alert("El nombre del producto no puede estar vacío.");
+      return false;
+    }
+
+    if (Number(datosForm.precio) <= 0 || isNaN(Number(datosForm.precio))) {
+      alert("El precio debe ser un número mayor que cero.");
+      return false;
+    }
+
+    return true;
+  };
+
+  const subirImagen = async () => {
+    const apiKey = import.meta.env.VITE_IMGBB_API_KEY;
+
+    const formData = new FormData();
+    formData.append("image", imagenFile);
+
+    const respuesta = await fetch(
+      `https://api.imgbb.com/1/upload?key=${apiKey}`,
+      {
+        method: "POST",
+        body: formData
+      }
+    );
+
+    const data = await respuesta.json();
+
+    if (!respuesta.ok || !data.success) {
+      throw new Error("Error al subir imagen");
+    }
+
+    return data.data.url;
+  };
+
   const manejarEnvio = async (e) => {
     e.preventDefault();
 
-    alert("Entró al submit");
+    if (!validarFormulario()) {
+      return;
+    }
 
-
-
-
-    if (!imagenFile) {
+    if (!productoAEditar && !imagenFile) {
       setMensaje("⚠️ Seleccioná una imagen");
       setTimeout(() => setMensaje(""), 3000);
       return;
@@ -53,24 +114,11 @@ function FormularioAltaProductoContainer() {
 
     setLoading(true);
 
-    const apiKey = import.meta.env.VITE_IMGBB_API_KEY;
-
-    const formData = new FormData();
-    formData.append("image", imagenFile);
-
     try {
-      const respuesta = await fetch(
-        `https://api.imgbb.com/1/upload?key=${apiKey}`,
-        {
-          method: "POST",
-          body: formData
-        }
-      );
+      let urlImagen = datosForm.imagen;
 
-      const data = await respuesta.json();
-
-      if (!respuesta.ok || !data.success) {
-        throw new Error("Error al subir imagen");
+      if (imagenFile) {
+        urlImagen = await subirImagen();
       }
 
       const productoCompleto = {
@@ -79,38 +127,44 @@ function FormularioAltaProductoContainer() {
         stock: Number(datosForm.stock),
         categoria: datosForm.categoria,
         detalle: datosForm.detalle,
-        imagen: data.data.url,
-        destacado: false,
-        oferta: false
+        imagen: urlImagen,
+        destacado: productoAEditar?.destacado || false,
+        oferta: productoAEditar?.oferta || false
       };
 
-      const productosCollection = collection(db, "productos");
+      if (productoAEditar) {
+        const docRef = doc(db, "productos", productoAEditar.id);
 
-      const docRef = await addDoc(productosCollection, productoCompleto);
+        await updateDoc(docRef, productoCompleto);
 
+        setMensaje("Producto actualizado correctamente ✔");
+      } else {
+        const productosCollection = collection(db, "productos");
 
+        const docRef = await addDoc(productosCollection, productoCompleto);
 
+        const productoConId = {
+          id: docRef.id,
+          ...productoCompleto
+        };
 
+        setProductoGuardado(productoConId);
 
-      const productoConId = {
-        id: docRef.id,
-        ...productoCompleto
-      };
+        setMensaje("Material guardado correctamente en Firebase ✔");
+      }
 
-      setProductoGuardado(productoConId);
-
-      setDatosForm({
-        nombre: "",
-        precio: "",
-        stock: "",
-        categoria: "",
-        detalle: ""
-      });
-
+      setDatosForm(estadoInicialForm);
       setImagenFile(null);
       setPreview(null);
 
-      setMensaje("Material guardado correctamente en Firebase ✔");
+      if (actualizarListado) {
+        actualizarListado();
+      }
+
+      if (productoAEditar && cancelarEdicion) {
+        cancelarEdicion();
+      }
+
       setTimeout(() => setMensaje(""), 3000);
     } catch (error) {
       console.error(error);
@@ -131,9 +185,12 @@ function FormularioAltaProductoContainer() {
         manejarEnvio={manejarEnvio}
         manejarCambioImagen={manejarCambioImagen}
         loading={loading}
+        modoEdicion={!!productoAEditar}
+        cancelarEdicion={cancelarEdicion}
+        preview={preview}
       />
 
-      {productoGuardado && (
+      {productoGuardado && !productoAEditar && (
         <div style={{ display: "flex", justifyContent: "center" }}>
           <div
             className="card-producto"
@@ -159,7 +216,9 @@ function FormularioAltaProductoContainer() {
             />
 
             <h3>{productoGuardado.nombre}</h3>
-            <p><strong>${productoGuardado.precio}</strong></p>
+            <p>
+              <strong>${productoGuardado.precio}</strong>
+            </p>
             <p>Stock: {productoGuardado.stock}</p>
             <p>Categoría: {productoGuardado.categoria}</p>
           </div>

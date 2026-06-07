@@ -3,7 +3,10 @@ function FormularioAltaProducto({
   manejarCambio,
   manejarEnvio,
   manejarCambioImagen,
-  loading
+  loading,
+  modoEdicion,
+  cancelarEdicion,
+  preview
 }) {
   const formStyle = {
     display: "flex",
@@ -19,8 +22,7 @@ function FormularioAltaProducto({
 
   return (
     <form style={formStyle} onSubmit={manejarEnvio}>
-
-      <h3>Agregar Nuevo Producto</h3>
+      <h3>{modoEdicion ? "Editar Producto" : "Agregar Nuevo Producto"}</h3>
 
       <p
         style={{
@@ -30,9 +32,10 @@ function FormularioAltaProducto({
           marginBottom: "10px"
         }}
       >
-        Formulario de carga administrativa. Los datos se muestran como vista previa del nuevo material.
+        {modoEdicion
+          ? "Modificá los datos del material seleccionado."
+          : "Formulario de carga administrativa. Los datos se muestran como vista previa del nuevo material."}
       </p>
-
 
       <div>
         <label>Nombre:</label>
@@ -42,6 +45,7 @@ function FormularioAltaProducto({
           placeholder="Ej: Antología de cuentos"
           value={datosForm.nombre}
           onChange={manejarCambio}
+          required
         />
       </div>
 
@@ -53,6 +57,8 @@ function FormularioAltaProducto({
           placeholder="Ej: 4500"
           value={datosForm.precio}
           onChange={manejarCambio}
+          min="1"
+          required
         />
       </div>
 
@@ -64,6 +70,7 @@ function FormularioAltaProducto({
           placeholder="Ej: 10"
           value={datosForm.stock}
           onChange={manejarCambio}
+          min="0"
         />
       </div>
 
@@ -93,12 +100,33 @@ function FormularioAltaProducto({
       </div>
 
       <div>
-        <label>Imagen del material:</label>
-        <input
-          type="file"
-          accept="image/*"
-          onChange={manejarCambioImagen}
-        />
+        <label>
+          {modoEdicion ? "Cambiar imagen del material:" : "Imagen del material:"}
+        </label>
+
+        <input type="file" accept="image/*" onChange={manejarCambioImagen} />
+
+        {modoEdicion && datosForm.imagen && !preview && (
+          <div>
+            <p>Imagen actual:</p>
+            <img
+              src={datosForm.imagen}
+              alt="Imagen actual"
+              style={{ width: "100px", borderRadius: "8px" }}
+            />
+          </div>
+        )}
+
+        {preview && (
+          <div>
+            <p>Nueva imagen seleccionada:</p>
+            <img
+              src={preview}
+              alt="Vista previa"
+              style={{ width: "100px", borderRadius: "8px" }}
+            />
+          </div>
+        )}
       </div>
 
       <button
@@ -115,8 +143,31 @@ function FormularioAltaProducto({
           borderRadius: "6px"
         }}
       >
-        {loading ? "Subiendo imagen, espera un momento..." : "Guardar Material"}
+        {loading
+          ? "Guardando..."
+          : modoEdicion
+          ? "Actualizar Producto"
+          : "Guardar Material"}
       </button>
+
+      {modoEdicion && (
+        <button
+          type="button"
+          onClick={cancelarEdicion}
+          style={{
+            backgroundColor: "#999",
+            color: "white",
+            cursor: "pointer",
+            fontWeight: "600",
+            fontSize: "14px",
+            padding: "10px",
+            border: "none",
+            borderRadius: "6px"
+          }}
+        >
+          Cancelar Edición
+        </button>
+      )}
     </form>
   );
 }
