@@ -11,41 +11,41 @@ import Contacto from "./paginas/contacto";
 import Gestion from "./componentes/Gestion/Gestion";
 import Carrito from "./paginas/carrito";
 import GestionCupones from "./componentes/GestionCupones/GestionCupones";
+import Login from "./componentes/Login/Login";
+import Registro from "./componentes/Registro/Registro";
+import ProtectedRoute from "./componentes/ProtectedRoute/ProtectedRoute";
+import Perfil from "./componentes/Perfil/Perfil";
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
-
         <Route index element={<Inicio />} />
 
         <Route
           path="productos"
-          element={
-            <ItemListContainer mensaje="Nuestros productos" />
-          }
+          element={<ItemListContainer mensaje="Nuestros productos" />}
         />
 
-        <Route
-          path="producto/:id"
-          element={<ItemDetalle />}
-        />
+        <Route path="producto/:id" element={<ItemDetalle />} />
 
         <Route
           path="destacados"
           element={
             <div className="contenido">
               <h1>Productos destacados</h1>
-              <p>
-                Estos son los materiales más elegidos por nuestros clientes.
-              </p>
+              <p>Estos son los materiales más elegidos por nuestros clientes.</p>
             </div>
           }
         />
 
         <Route
           path="alta-producto"
-          element={<Gestion />}
+          element={
+            <ProtectedRoute rolesPermitidos={["admin"]}>
+              <Gestion />
+            </ProtectedRoute>
+          }
         />
 
         <Route path="antologias" element={<Antologias />} />
@@ -60,11 +60,27 @@ function App() {
 
         <Route path="carrito" element={<Carrito />} />
 
+        <Route path="login" element={<Login />} />
+
+        <Route path="registro" element={<Registro />} />
+
         <Route
-          path="admin/cupones" element={<GestionCupones />}
+          path="perfil"
+          element={
+            <ProtectedRoute>
+              <Perfil />
+            </ProtectedRoute>
+          }
         />
 
-
+        <Route
+          path="admin/cupones"
+          element={
+            <ProtectedRoute rolesPermitidos={["admin"]}>
+              <GestionCupones />
+            </ProtectedRoute>
+          }
+        />
       </Route>
     </Routes>
   );
