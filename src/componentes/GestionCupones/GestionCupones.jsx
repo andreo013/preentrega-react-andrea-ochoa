@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { collection, addDoc, getDocs, deleteDoc, doc } from "firebase/firestore";
 import { db } from "../../firebase/config";
+import { Helmet } from "react-helmet-async";
 
 function GestionCupones() {
   const [cupones, setCupones] = useState([]);
@@ -69,6 +70,16 @@ function GestionCupones() {
   };
 
   return (
+  <>
+    <Helmet>
+      <title>Caja Didáctica | Gestión de Cupones</title>
+
+      <meta
+        name="description"
+        content="Panel de administración para crear y eliminar cupones de descuento en Caja Didáctica."
+      />
+    </Helmet>
+
     <div className="contenido">
       <h1>Gestión de cupones</h1>
 
@@ -156,7 +167,8 @@ function GestionCupones() {
           ))}
         </ul>
       )}
-    </div>
+        </div>
+  </>
   );
 }
 

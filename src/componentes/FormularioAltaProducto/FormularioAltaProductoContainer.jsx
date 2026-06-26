@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { collection, addDoc, doc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase/config";
 import FormularioAltaProducto from "./FormularioAltaProducto";
+import { toast } from "react-toastify";
 
 const estadoInicialForm = {
   nombre: "",
@@ -64,12 +65,12 @@ function FormularioAltaProductoContainer({
 
   const validarFormulario = () => {
     if (datosForm.nombre.trim() === "") {
-      alert("El nombre del producto no puede estar vacío.");
+      toast.error("El nombre del producto no puede estar vacío.");
       return false;
     }
 
     if (Number(datosForm.precio) <= 0 || isNaN(Number(datosForm.precio))) {
-      alert("El precio debe ser un número mayor que cero.");
+      toast.error("El precio debe ser un número mayor que cero.");
       return false;
     }
 
@@ -107,7 +108,7 @@ function FormularioAltaProductoContainer({
     }
 
     if (!productoAEditar && !imagenFile) {
-      setMensaje("⚠️ Seleccioná una imagen");
+      toast.warning("Seleccioná una imagen.");
       setTimeout(() => setMensaje(""), 3000);
       return;
     }
@@ -137,7 +138,7 @@ function FormularioAltaProductoContainer({
 
         await updateDoc(docRef, productoCompleto);
 
-        setMensaje("Producto actualizado correctamente ✔");
+       toast.success("Producto actualizado correctamente.");
       } else {
         const productosCollection = collection(db, "productos");
 
@@ -150,7 +151,7 @@ function FormularioAltaProductoContainer({
 
         setProductoGuardado(productoConId);
 
-        setMensaje("Material guardado correctamente en Firebase ✔");
+        toast.success("Material guardado correctamente.");
       }
 
       setDatosForm(estadoInicialForm);
@@ -168,7 +169,7 @@ function FormularioAltaProductoContainer({
       setTimeout(() => setMensaje(""), 3000);
     } catch (error) {
       console.error(error);
-      setMensaje("❌ Error al guardar el producto");
+      toast.error("Error al guardar el producto.");
       setTimeout(() => setMensaje(""), 3000);
     } finally {
       setLoading(false);

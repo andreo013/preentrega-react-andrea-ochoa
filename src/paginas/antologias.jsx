@@ -1,12 +1,23 @@
 import ItemListContainer from "../componentes/Productos/ItemListContainer/ItemListContainer";
+import { Helmet } from "react-helmet-async";
 
 function Antologias() {
   return (
-    <div className="contenido">
-      <h1>ANTOLOGÍAS</h1>
+    <>
+      <Helmet>
+        <title>Caja Didáctica | Antologías</title>
+        <meta
+          name="description"
+          content="Antologías literarias y materiales didácticos para trabajar la lectura en el aula."
+        />
+      </Helmet>
 
-      <ItemListContainer categoria="antologias" />
-    </div>
+      <div className="contenido">
+        <h1>ANTOLOGÍAS</h1>
+
+        <ItemListContainer categoria="antologias" />
+      </div>
+    </>
   );
 }
 

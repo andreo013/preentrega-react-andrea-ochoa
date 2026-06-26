@@ -1,9 +1,20 @@
 import ItemListContainer from "../componentes/Productos/ItemListContainer/ItemListContainer";
 import Equipo from "../componentes/Equipo/Equipo";
+import { Helmet } from "react-helmet-async";
 
 function Inicio() {
   return (
+  <>
+    <Helmet>
+      <title>Caja Didáctica | Inicio</title>
+
+      <meta
+        name="description"
+        content="Caja Didáctica: materiales educativos, juegos, cuadernillos y antologías para docentes y estudiantes."
+      />
+    </Helmet>
     <div className="contenido">
+
       <h1 className="titulo-sale">¿Quiénes somos?</h1>
 
       <section className="presentacion">
@@ -49,6 +60,7 @@ function Inicio() {
         </div>
       </section>
     </div>
+ </>
   );
 }
 

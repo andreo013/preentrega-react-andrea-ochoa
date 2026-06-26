@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
+import { Helmet } from "react-helmet-async";
 
 function Perfil() {
   const { user, logout } = useAuth();
@@ -7,11 +8,20 @@ function Perfil() {
 
   const cerrarSesion = async () => {
     await logout();
-    alert("Sesión cerrada");
+    toast.success("Sesión cerrada");
     navigate("/");
   };
 
   return (
+  <>
+    <Helmet>
+      <title>Caja Didáctica | Mi Perfil</title>
+
+      <meta
+        name="description"
+        content="Consultá la información de tu cuenta en Caja Didáctica."
+      />
+    </Helmet>
     <div className="contenido">
       <div
         style={{
@@ -34,7 +44,8 @@ function Perfil() {
           Cerrar Sesión
         </button>
       </div>
-    </div>
+      </div>
+  </>
   );
 }
 

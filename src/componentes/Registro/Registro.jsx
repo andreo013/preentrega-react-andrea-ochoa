@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
+import { toast } from "react-toastify";
+import { Helmet } from "react-helmet-async";
 
 function Registro() {
   const [email, setEmail] = useState("");
@@ -14,7 +16,7 @@ function Registro() {
 
     try {
       await signup(email, password);
-      alert("Usuario registrado correctamente");
+      toast.success("Usuario registrado correctamente");
       navigate("/");
     } catch (error) {
       if (error.code === "auth/email-already-in-use") {
@@ -29,12 +31,22 @@ function Registro() {
         }
       } else {
         console.error("Error en el registro:", error);
-        alert("No se pudo registrar el usuario. Verificá los datos.");
+        toast.error("No se pudo registrar el usuario. Verificá los datos.");
       }
     }
   };
 
-  return (
+ return (
+  <>
+    <Helmet>
+      <title>Caja Didáctica | Registro</title>
+
+      <meta
+        name="description"
+        content="Creá tu cuenta en Caja Didáctica para acceder a materiales educativos y realizar compras."
+      />
+    </Helmet>
+
     <div className="contenido">
       <form
         onSubmit={handleRegistro}
@@ -70,7 +82,8 @@ function Registro() {
 
         <button type="submit">Registrarse</button>
       </form>
-    </div>
+        </div>
+  </>
   );
 }
 

@@ -1,6 +1,7 @@
 import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { CartContext } from "../../../context/CartContext";
+import { toast } from "react-toastify";
 
 function Item({ producto, oferta }) {
   const { id, nombre, precio, stock, imagen } = producto;
@@ -19,25 +20,26 @@ function Item({ producto, oferta }) {
 
   return (
     <div
-      className="card-producto"
-      style={{
-        border: "1px solid #ddd",
-        borderRadius: "10px",
-        padding: "15px",
-        width: "220px",
-        textAlign: "center",
-        background: "white"
-      }}
+     style={{
+  border: "1px solid #e4d8ff",
+  borderRadius: "14px",
+  padding: "12px",
+  width: "220px",
+  textAlign: "center",
+  background: "#faf7ff",
+  boxShadow: "0 3px 10px rgba(124, 77, 255, 0.12)"
+}}
     >
       <img
         src={imagen}
         alt={nombre}
-        style={{
-          width: "100%",
-          height: "auto",
-          objectFit: "cover",
-          borderRadius: "8px"
-        }}
+       style={{
+  width: "100%",
+  height: "160px",
+  objectFit: "contain",
+  borderRadius: "8px",
+  backgroundColor: "white"
+}}
       />
 
       <h3>{nombre}</h3>
@@ -77,7 +79,7 @@ function Item({ producto, oferta }) {
             if (cantidad + cantidadActual < stock) {
               setCantidad(cantidad + 1);
             } else {
-              alert("No hay más stock disponible");
+              toast.warning("No hay más stock disponible");
             }
           }}
         >
@@ -88,14 +90,15 @@ function Item({ producto, oferta }) {
       <button
         onClick={agregarAlCarrito}
         style={{
-          backgroundColor: "#7c4dff",
-          color: "white",
-          border: "none",
-          borderRadius: "6px",
-          padding: "8px 10px",
-          cursor: "pointer",
-          marginBottom: "10px"
-        }}
+  backgroundColor: "#7c4dff",
+  color: "white",
+  border: "none",
+  borderRadius: "8px",
+  padding: "7px 10px",
+  cursor: "pointer",
+  marginBottom: "8px",
+  fontSize: "0.95rem"
+}}
       >
         Agregar al carrito
       </button>

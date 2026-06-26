@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { CartContext } from "../context/CartContext";
+import { toast } from "react-toastify";
 
 function Carrito() {
   const {
@@ -68,7 +69,10 @@ function Carrito() {
             </button>
 
             <button
-              onClick={() => removeItem(producto.id)}
+              onClick={() => {
+  removeItem(producto.id);
+  toast.success("Producto eliminado del carrito.");
+}}
               style={{
                 backgroundColor: "#ff4d4d",
                 color: "white",
@@ -87,7 +91,10 @@ function Carrito() {
       <h2>Total a pagar: $ {getCartTotal()} ARS</h2>
 
       <button
-        onClick={clearCart}
+        onClick={() => {
+  clearCart();
+  toast.success("Carrito vaciado.");
+}}
         style={{
           backgroundColor: "#444",
           color: "white",
@@ -104,7 +111,7 @@ function Carrito() {
       <Link
         to="/"
         onClick={() => {
-          alert("Gracias por comprar");
+          toast.success("¡Gracias por comprar!");
           clearCart();
         }}
         style={{

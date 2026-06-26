@@ -3,15 +3,17 @@ import { NavLink, useNavigate } from "react-router-dom";
 import styles from "./Header.module.css";
 import CartWidget from "../CartWidget/CartWidget";
 import { useAuth } from "../../context/AuthContext";
+import { toast } from "react-toastify";
 
 function Header() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
 
   const cerrarSesion = async () => {
-    await logout();
-    navigate("/");
-  };
+  await logout();
+  toast.success("Sesión cerrada");
+  navigate("/");
+};
 
   return (
     <header className={styles.header}>

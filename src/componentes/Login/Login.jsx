@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
+import { toast } from "react-toastify";
+import { Helmet } from "react-helmet-async";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -14,15 +16,24 @@ function Login() {
 
     try {
       await login(email, password);
-      alert("Inicio de sesión exitoso");
+      toast.success("Inicio de sesión exitoso");
       navigate("/");
     } catch (error) {
       console.error("Error en el login:", error);
-      alert("Correo o contraseña incorrectos");
+      toast.error("Correo o contraseña incorrectos");
     }
   };
 
-  return (
+return (
+  <>
+    <Helmet>
+      <title>Caja Didáctica | Iniciar sesión</title>
+      <meta
+        name="description"
+        content="Iniciá sesión en Caja Didáctica para acceder a tu perfil y gestionar tus compras."
+      />
+    </Helmet>
+
     <div className="contenido">
       <form
         onSubmit={handleLogin}
@@ -63,7 +74,8 @@ function Login() {
         </p>
       </form>
     </div>
-  );
+  </>
+);
 }
 
 export default Login;
