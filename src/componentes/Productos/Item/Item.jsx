@@ -21,30 +21,38 @@ function Item({ producto, oferta }) {
 
   return (
     <div
-    className={styles.cardProducto}
-     style={{
-  border: "1px solid #e4d8ff",
-  borderRadius: "14px",
-  padding: "12px",
-  width: "220px",
-  textAlign: "center",
-  background: "#faf7ff",
-  boxShadow: "0 3px 10px rgba(124, 77, 255, 0.12)"
-}}
+      className={styles.cardProducto}
+      style={{
+        border: "1px solid #e4d8ff",
+        borderRadius: "14px",
+        padding: "12px",
+        width: "220px",
+        textAlign: "center",
+        background: "#faf7ff",
+        boxShadow: "0 3px 10px rgba(124, 77, 255, 0.12)"
+      }}
     >
       <img
         src={imagen}
         alt={nombre}
-       style={{
-  width: "100%",
-  height: "160px",
-  objectFit: "contain",
-  borderRadius: "8px",
-  backgroundColor: "white"
-}}
+        style={{
+          width: "100%",
+          height: "160px",
+          objectFit: "contain",
+          borderRadius: "8px",
+          backgroundColor: "white"
+        }}
       />
 
-      <h3>{nombre}</h3>
+      <h3
+        style={{
+          minHeight: "42px",
+          lineHeight: "1.2",
+          margin: "10px 0 8px"
+        }}
+      >
+        {nombre}
+      </h3>
 
       {oferta ? (
         <p className="precio-sale">
@@ -92,15 +100,15 @@ function Item({ producto, oferta }) {
       <button
         onClick={agregarAlCarrito}
         style={{
-  backgroundColor: "#7c4dff",
-  color: "white",
-  border: "none",
-  borderRadius: "8px",
-  padding: "7px 10px",
-  cursor: "pointer",
-  marginBottom: "8px",
-  fontSize: "0.95rem"
-}}
+          backgroundColor: "#7c4dff",
+          color: "white",
+          border: "none",
+          borderRadius: "8px",
+          padding: "7px 10px",
+          cursor: "pointer",
+          marginBottom: "12px",
+          fontSize: "0.95rem"
+        }}
       >
         Agregar al carrito
       </button>

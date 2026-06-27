@@ -8,6 +8,17 @@ import { toast } from "react-toastify";
 function ItemListContainer({ mensaje, categoria, destacados, oferta }) {
   const [productos, setProductos] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [busqueda, setBusqueda] = useState("");
+  const [paginaActual, setPaginaActual] = useState(1);
+
+  const productosPorPagina = 10;
+
+  const normalizarTexto = (texto) =>
+    texto
+      .toString()
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "");
 
   useEffect(() => {
     setLoading(true);
@@ -33,12 +44,11 @@ function ItemListContainer({ mensaje, categoria, destacados, oferta }) {
           );
         }
 
-        productosFirebase.sort((a, b) => {
-          const numA = parseInt(a.nombre?.match(/\d+/)?.[0] || 0);
-          const numB = parseInt(b.nombre?.match(/\d+/)?.[0] || 0);
-
-          return numA - numB;
-        });
+        productosFirebase.sort((a, b) =>
+          a.nombre.localeCompare(b.nombre, "es", {
+            sensitivity: "base"
+          })
+        );
 
         setProductos(productosFirebase);
       })
@@ -50,6 +60,10 @@ function ItemListContainer({ mensaje, categoria, destacados, oferta }) {
         setLoading(false);
       });
   }, [categoria, destacados]);
+
+  useEffect(() => {
+    setPaginaActual(1);
+  }, [busqueda, categoria]);
 
   if (loading) {
     return (
@@ -64,15 +78,143 @@ function ItemListContainer({ mensaje, categoria, destacados, oferta }) {
     );
   }
 
+  const busquedaLimpia = normalizarTexto(busqueda.trim());
+
+  const productosFiltrados =
+    busquedaLimpia === ""
+      ? productos
+      : productos.filter((producto) =>
+          normalizarTexto(producto.nombre || "").includes(busquedaLimpia)
+        );
+
+  const totalPaginas = Math.ceil(productosFiltrados.length / productosPorPagina);
+
+  const indiceInicial = (paginaActual - 1) * productosPorPagina;
+  const indiceFinal = indiceInicial + productosPorPagina;
+
+  const productosPaginados = productosFiltrados.slice(
+    indiceInicial,
+    indiceFinal
+  );
+
+  const cambiarPagina = (numeroPagina) => {
+  setPaginaActual(numeroPagina);
+  window.scrollTo({ top: 0, behavior: "smooth" });
+};
+
+  const Paginador = () => {
+    if (totalPaginas <= 1) return null;
+
+    return (
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          gap: "8px",
+          margin: "25px 0",
+          flexWrap: "wrap"
+        }}
+      >
+        <button
+          onClick={() => cambiarPagina(paginaActual - 1)}
+          disabled={paginaActual === 1}
+          style={{
+            padding: "7px 12px",
+            borderRadius: "8px",
+            border: "1px solid #d8c7ff",
+            cursor: paginaActual === 1 ? "not-allowed" : "pointer"
+          }}
+        >
+          Anterior
+        </button>
+
+        {Array.from({ length: totalPaginas }, (_, index) => (
+          <button
+            key={index + 1}
+            onClick={() => cambiarPagina(index + 1)}
+            style={{
+              padding: "7px 12px",
+              borderRadius: "8px",
+              border: "1px solid #d8c7ff",
+              cursor: "pointer",
+              backgroundColor: paginaActual === index + 1 ? "#7c4dff" : "white",
+              color: paginaActual === index + 1 ? "white" : "#7c4dff"
+            }}
+          >
+            {index + 1}
+          </button>
+        ))}
+
+        <button
+          onClick={() => cambiarPagina(paginaActual + 1)}
+          disabled={paginaActual === totalPaginas}
+          style={{
+            padding: "7px 12px",
+            borderRadius: "8px",
+            border: "1px solid #d8c7ff",
+            cursor: paginaActual === totalPaginas ? "not-allowed" : "pointer"
+          }}
+        >
+          Siguiente
+        </button>
+      </div>
+    );
+  };
+
   return (
     <div>
       {mensaje && (
-        <h2 style={{ textAlign: "center", marginTop: "20px" }}>
-          {mensaje}
-        </h2>
+        <h2 style={{ textAlign: "center", marginTop: "20px" }}>{mensaje}</h2>
       )}
 
-      <ItemList productos={productos} oferta={oferta} />
+      <div style={{ textAlign: "center", margin: "20px 0" }}>
+        <input
+          type="text"
+          placeholder="🔍 Buscar material..."
+          value={busqueda}
+          onChange={(e) => setBusqueda(e.target.value)}
+          style={{
+            width: "90%",
+            maxWidth: "420px",
+            padding: "10px 14px",
+            borderRadius: "10px",
+            border: "1px solid #d8c7ff",
+            outline: "none"
+          }}
+        />
+
+        {busqueda && (
+          <div style={{ marginTop: "10px" }}>
+            <button
+              onClick={() => setBusqueda("")}
+              style={{
+                backgroundColor: "#7c4dff",
+                color: "white",
+                border: "none",
+                borderRadius: "8px",
+                padding: "7px 12px",
+                cursor: "pointer"
+              }}
+            >
+              Limpiar búsqueda
+            </button>
+          </div>
+        )}
+      </div>
+
+      {productosFiltrados.length > 0 ? (
+        <>
+          
+
+          <ItemList productos={productosPaginados} oferta={oferta} />
+
+          <Paginador />
+        </>
+      ) : (
+        <p style={{ textAlign: "center", marginTop: "20px" }}>
+          No se encontraron productos.
+        </p>
+      )}
     </div>
   );
 }
