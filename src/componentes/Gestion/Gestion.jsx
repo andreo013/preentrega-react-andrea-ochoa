@@ -13,6 +13,7 @@ function Gestion() {
   const [productoAEditar, setProductoAEditar] = useState(null);
 
   const obtenerProductos = async () => {
+  try {
     const productosRef = collection(db, "productos");
     const resp = await getDocs(productosRef);
 
@@ -22,28 +23,32 @@ function Gestion() {
     }));
 
     productosFirebase.sort((a, b) => {
-  const ordenCategorias = {
-    antologias: 1,
-    cuadernillos: 2,
-    fechas: 3,
-    juegos: 4
-  };
+      const ordenCategorias = {
+        antologias: 1,
+        cuadernillos: 2,
+        fechas: 3,
+        juegos: 4
+      };
 
-  const categoriaA = ordenCategorias[a.categoria] || 99;
-  const categoriaB = ordenCategorias[b.categoria] || 99;
+      const categoriaA = ordenCategorias[a.categoria] || 99;
+      const categoriaB = ordenCategorias[b.categoria] || 99;
 
-  if (categoriaA !== categoriaB) {
-    return categoriaA - categoriaB;
-  }
+      if (categoriaA !== categoriaB) {
+        return categoriaA - categoriaB;
+      }
 
-  const numA = parseInt(a.nombre?.match(/\d+/)?.[0] || 0);
-  const numB = parseInt(b.nombre?.match(/\d+/)?.[0] || 0);
+      const numA = parseInt(a.nombre?.match(/\d+/)?.[0] || 0);
+      const numB = parseInt(b.nombre?.match(/\d+/)?.[0] || 0);
 
-  return numA - numB;
-});
+      return numA - numB;
+    });
 
     setProductos(productosFirebase);
-  };
+  } catch (error) {
+    console.error("Error al obtener productos:", error);
+    toast.error("Error al cargar los productos.");
+  }
+};
 
   useEffect(() => {
     obtenerProductos();
@@ -58,18 +63,26 @@ function Gestion() {
     setProductoAEditar(null);
   };
 
-  const handleDelete = async (id) => {
-    const confirmacion = window.confirm(
-      "¿Estás segura de que querés eliminar este producto?"
-    );
+const handleDelete = async (id) => {
+  const confirmacion = window.confirm(
+    "¿Estás segura de que querés eliminar este producto?"
+  );
 
-    if (confirmacion) {
+  if (confirmacion) {
+    try {
       const docRef = doc(db, "productos", id);
+
       await deleteDoc(docRef);
+
       setProductos(productos.filter((prod) => prod.id !== id));
+
       toast.success("Producto eliminado.");
+    } catch (error) {
+      console.error("Error al eliminar producto:", error);
+      toast.error("Error al eliminar el producto.");
     }
-  };
+  }
+};
 
   return (
   <>

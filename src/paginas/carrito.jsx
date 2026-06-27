@@ -111,7 +111,7 @@ function Carrito() {
       <Link
         to="/"
         onClick={() => {
-          toast.success("¡Gracias por comprar!");
+       toast.success("Gracias por su compra!");
           clearCart();
         }}
         style={{

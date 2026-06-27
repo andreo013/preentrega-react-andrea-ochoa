@@ -2,6 +2,7 @@ import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { CartContext } from "../../../context/CartContext";
 import { toast } from "react-toastify";
+import styles from "./Item.module.css";
 
 function Item({ producto, oferta }) {
   const { id, nombre, precio, stock, imagen } = producto;
@@ -20,6 +21,7 @@ function Item({ producto, oferta }) {
 
   return (
     <div
+    className={styles.cardProducto}
      style={{
   border: "1px solid #e4d8ff",
   borderRadius: "14px",

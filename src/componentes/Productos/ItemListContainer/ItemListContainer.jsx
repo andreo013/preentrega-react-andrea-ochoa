@@ -2,11 +2,16 @@ import { useEffect, useState } from "react";
 import ItemList from "../ItemList/ItemList";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../../firebase/config";
+import { Spinner } from "react-bootstrap";
+import { toast } from "react-toastify";
 
 function ItemListContainer({ mensaje, categoria, destacados, oferta }) {
   const [productos, setProductos] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true);
+
     const productosCollection = collection(db, "productos");
 
     getDocs(productosCollection)
@@ -35,18 +40,29 @@ function ItemListContainer({ mensaje, categoria, destacados, oferta }) {
           return numA - numB;
         });
 
-        console.table(productosFirebase.map((p) => ({
-          nombre: p.nombre,
-          categoria: p.categoria,
-          imagen: p.imagen
-        })));
-
         setProductos(productosFirebase);
       })
       .catch((error) => {
         console.error("Error al traer productos desde Firebase:", error);
+        toast.error("Error al cargar los productos.");
+      })
+      .finally(() => {
+        setLoading(false);
       });
   }, [categoria, destacados]);
+
+  if (loading) {
+    return (
+      <div
+        className="d-flex justify-content-center align-items-center"
+        style={{ height: "50vh" }}
+      >
+        <Spinner animation="border" variant="primary" role="status">
+          <span className="visually-hidden">Cargando...</span>
+        </Spinner>
+      </div>
+    );
+  }
 
   return (
     <div>

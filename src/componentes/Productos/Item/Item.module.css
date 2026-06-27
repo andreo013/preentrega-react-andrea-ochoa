@@ -1,0 +1,9 @@
+.cardProducto {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  cursor: pointer;
+}
+
+.cardProducto:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 22px rgba(124, 77, 255, 0.25);
+}

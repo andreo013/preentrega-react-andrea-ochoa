@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { CartContext } from "../../../context/CartContext";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../../firebase/config";
+import { Spinner } from "react-bootstrap";
 
 function ItemDetalle() {
   const { id } = useParams();
@@ -29,8 +30,17 @@ function ItemDetalle() {
   }, [id]);
 
   if (producto === null) {
-    return <p>Cargando producto...</p>;
-  }
+  return (
+    <div
+      className="d-flex justify-content-center align-items-center"
+      style={{ height: "50vh" }}
+    >
+      <Spinner animation="border" variant="primary" role="status">
+        <span className="visually-hidden">Cargando...</span>
+      </Spinner>
+    </div>
+  );
+}
 
   if (producto === false) {
     return <p>Producto no encontrado.</p>;
