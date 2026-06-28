@@ -1,6 +1,61 @@
+import { useState } from "react";
+import { toast } from "react-toastify";
+
 function FormularioProducto() {
+  const [formulario, setFormulario] = useState({
+    nombre: "",
+    email: "",
+    consulta: ""
+  });
+
+  const manejarCambio = (e) => {
+    const { name, value } = e.target;
+
+    setFormulario({
+      ...formulario,
+      [name]: value
+    });
+  };
+
+  const manejarEnvio = (e) => {
+    e.preventDefault();
+
+    if (
+      formulario.nombre.trim() === "" ||
+      formulario.email.trim() === "" ||
+      formulario.consulta.trim() === ""
+    ) {
+      toast.error("Completá todos los campos.");
+      return;
+    }
+
+    const emailValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formulario.email);
+
+    if (!emailValido) {
+      toast.error("Ingresá un email válido.");
+      return;
+    }
+
+    toast.success("Consulta enviada correctamente.");
+
+    setFormulario({
+      nombre: "",
+      email: "",
+      consulta: ""
+    });
+  };
+
+  const borrarFormulario = () => {
+    setFormulario({
+      nombre: "",
+      email: "",
+      consulta: ""
+    });
+  };
+
   return (
     <form
+      onSubmit={manejarEnvio}
       style={{
         display: "flex",
         flexDirection: "column",
@@ -13,12 +68,13 @@ function FormularioProducto() {
         gap: "14px"
       }}
     >
-      <h2 style={{ marginBottom: "10px" }}>
-        Enviá tu consulta
-      </h2>
+      <h2 style={{ marginBottom: "10px" }}>Enviá tu consulta</h2>
 
       <input
         type="text"
+        name="nombre"
+        value={formulario.nombre}
+        onChange={manejarCambio}
         placeholder="Nombre"
         style={{
           padding: "12px",
@@ -29,6 +85,9 @@ function FormularioProducto() {
 
       <input
         type="email"
+        name="email"
+        value={formulario.email}
+        onChange={manejarCambio}
         placeholder="Email"
         style={{
           padding: "12px",
@@ -38,6 +97,9 @@ function FormularioProducto() {
       />
 
       <textarea
+        name="consulta"
+        value={formulario.consulta}
+        onChange={manejarCambio}
         placeholder="Escribí tu consulta..."
         rows="5"
         style={{
@@ -72,7 +134,8 @@ function FormularioProducto() {
         </button>
 
         <button
-          type="reset"
+          type="button"
+          onClick={borrarFormulario}
           style={{
             flex: 1,
             backgroundColor: "#dc3545",
