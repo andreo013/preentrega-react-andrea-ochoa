@@ -18,22 +18,33 @@ function Inicio() {
       <h1 className="titulo-sale">¿Quiénes somos?</h1>
 
       <section className="presentacion">
-        <img
-          src="/images/reseñas/Presentacion.png"
-          alt="Presentación de la tienda"
-          className="imagen-presentacion"
-        />
-      </section>
+  <picture>
+    <source
+      media="(max-width: 768px)"
+      srcSet="/images/reseñas/Presentacion-mobile.png"
+    />
+
+    <img
+      src="/images/reseñas/Presentacion.png"
+      alt="Presentación de la tienda"
+      className="imagen-presentacion"
+    />
+  </picture>
+</section>
 
      <Equipo />
 
-      <section>
-        <h1 className="titulo-sale">
-          Ofertas del <span>MES</span>
-        </h1>
+<section
+  style={{
+    marginTop: "20px",
+  }}
+>
+  <h1 className="titulo-sale">
+    Ofertas del <span>MES</span>
+  </h1>
 
-        <ItemListContainer destacados={true} oferta={true} />
-      </section>
+  <ItemListContainer destacados={true} oferta={true} />
+</section>
 
       <section>
         <h1 className="titulo-sale">Reseñas</h1>

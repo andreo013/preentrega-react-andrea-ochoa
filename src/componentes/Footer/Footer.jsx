@@ -1,4 +1,12 @@
 function Footer() {
+  const itemFooter = {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: "8px",
+    whiteSpace: "nowrap",
+  };
+
   return (
     <footer
       style={{
@@ -8,7 +16,6 @@ function Footer() {
         marginTop: "40px",
         width: "100%",
         boxSizing: "border-box",
-        overflow: "hidden",
       }}
     >
       <div
@@ -16,32 +23,27 @@ function Footer() {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          gap: "28px",
+          gap: "40px",
           flexWrap: "wrap",
           textAlign: "center",
         }}
       >
-        <p
-          style={{
-            margin: 0,
-            lineHeight: "1.3",
-          }}
-        >
+        <p style={{ margin: 0 }}>
           <strong>Caja Didáctica</strong> - Recursos y materiales educativos
           para docentes.
         </p>
 
-        <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+        <div style={itemFooter}>
           <img src="/images/email.png" alt="Email" style={{ width: "24px" }} />
           <span>contacto@cajadidactica.com</span>
         </div>
 
-        <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+        <div style={itemFooter}>
           <img src="/images/ig.png" alt="Instagram" style={{ width: "28px" }} />
           <span>@cajadidactica</span>
         </div>
 
-        <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+        <div style={itemFooter}>
           <img src="/images/tk.png" alt="TikTok" style={{ width: "28px" }} />
           <span>@cajadidactica</span>
         </div>
