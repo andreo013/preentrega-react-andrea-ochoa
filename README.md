@@ -159,6 +159,7 @@ Como evolución futura del proyecto podrían incorporarse nuevas funcionalidades
 * Historial de compras.
 * Filtros avanzados por categoría y precio.
 * Valoraciones y comentarios de usuarios.
+* Cupones con fecha de vencimiento, límite de usos o asociados a usuarios específicos.
 
 ---
 
