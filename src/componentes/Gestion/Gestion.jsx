@@ -10,6 +10,14 @@ import { Helmet } from "react-helmet-async";
 function Gestion() {
   const [productos, setProductos] = useState([]);
   const [productoAEditar, setProductoAEditar] = useState(null);
+  const [busquedaGestion, setBusquedaGestion] = useState("");
+
+  const normalizarTexto = (texto) =>
+    texto
+      .toString()
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "");
 
   const obtenerProductos = async () => {
     try {
@@ -82,6 +90,15 @@ function Gestion() {
     }
   };
 
+  const busquedaLimpia = normalizarTexto(busquedaGestion.trim());
+
+  const productosFiltrados =
+    busquedaLimpia === ""
+      ? productos
+      : productos.filter((producto) =>
+          normalizarTexto(producto.nombre || "").includes(busquedaLimpia)
+        );
+
   return (
     <>
       <Helmet>
@@ -106,133 +123,186 @@ function Gestion() {
 
         <h2 className="text-center mb-4">Lista de productos</h2>
 
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
-            gap: "24px",
-            maxWidth: "1200px",
-            margin: "0 auto",
-            justifyItems: "center"
-          }}
-        >
-          {productos.map((prod) => (
-            <Card
-              key={prod.id}
-              className="shadow-sm border-0"
-              style={{
-                width: "100%",
-                maxWidth: "270px",
-                borderRadius: "18px",
-                backgroundColor: "#ffffff",
-                overflow: "hidden",
-                boxShadow: "0 4px 14px rgba(124, 77, 255, 0.15)"
-              }}
-            >
-              <div
+        <div style={{ textAlign: "center", marginBottom: "25px" }}>
+          <input
+            type="text"
+            placeholder="🔍 Buscar producto para editar..."
+            value={busquedaGestion}
+            onChange={(e) => setBusquedaGestion(e.target.value)}
+            style={{
+              width: "90%",
+              maxWidth: "420px",
+              padding: "10px 14px",
+              borderRadius: "10px",
+              border: "1px solid #d8c7ff",
+              outline: "none"
+            }}
+          />
+
+          {busquedaGestion && (
+            <div style={{ marginTop: "10px" }}>
+              <button
+                onClick={() => setBusquedaGestion("")}
                 style={{
-                  backgroundColor: "#f3ecff",
-                  margin: "12px",
-                  padding: "12px",
-                  borderRadius: "14px",
-                  textAlign: "center"
+                  backgroundColor: "#7c4dff",
+                  color: "white",
+                  border: "none",
+                  borderRadius: "8px",
+                  padding: "7px 12px",
+                  cursor: "pointer"
                 }}
               >
-                <Card.Img
-                  src={prod.imagen}
-                  alt={prod.nombre}
-                  style={{
-                    width: "100%",
-                    height: "145px",
-                    objectFit: "contain",
-                    borderRadius: "10px"
-                  }}
-                />
-              </div>
+                Limpiar búsqueda
+              </button>
+            </div>
+          )}
+        </div>
 
-              <Card.Body
-                className="text-center d-flex flex-column"
-                style={{ padding: "12px" }}
+        {productosFiltrados.length === 0 ? (
+          <p style={{ textAlign: "center", marginTop: "20px" }}>
+            No se encontraron productos.
+          </p>
+        ) : (
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+              gap: "24px",
+              maxWidth: "1200px",
+              margin: "0 auto",
+              justifyItems: "center"
+            }}
+          >
+            {productosFiltrados.map((prod) => (
+              <Card
+                key={prod.id}
+                className="shadow-sm border-0"
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = "translateY(-6px)";
+                  e.currentTarget.style.boxShadow =
+                    "0 8px 20px rgba(124, 77, 255, 0.22)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = "translateY(0)";
+                  e.currentTarget.style.boxShadow =
+                    "0 4px 14px rgba(124, 77, 255, 0.15)";
+                }}
+                style={{
+                  width: "100%",
+                  maxWidth: "270px",
+                  borderRadius: "18px",
+                  backgroundColor: "#ffffff",
+                  overflow: "hidden",
+                  boxShadow: "0 4px 14px rgba(124, 77, 255, 0.15)",
+                  transition: "all 0.25s ease",
+                  cursor: "default"
+                }}
               >
-                <Card.Title
-                  style={{
-                    color: "#5f2eea",
-                    fontWeight: "700",
-                    fontSize: "1.15rem",
-                    marginBottom: "8px"
-                  }}
-                >
-                  {prod.nombre}
-                </Card.Title>
-
-                <Card.Text style={{ marginBottom: "4px" }}>
-                  <strong>Precio:</strong> ${prod.precio}
-                </Card.Text>
-
-                <Card.Text style={{ marginBottom: "12px" }}>
-                  <strong>Stock:</strong> {prod.stock}
-                </Card.Text>
-
                 <div
                   style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    gap: "24px",
-                    marginTop: "20px"
+                    backgroundColor: "#f3ecff",
+                    margin: "12px",
+                    padding: "12px",
+                    borderRadius: "14px",
+                    textAlign: "center"
                   }}
                 >
-                  <Button
-                    onClick={() => handleEditClick(prod)}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.transform = "translateY(-2px)";
-                      e.currentTarget.style.boxShadow =
-                        "0 6px 14px rgba(0,0,0,.18)";
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.transform = "translateY(0)";
-                      e.currentTarget.style.boxShadow = "none";
-                    }}
+                  <Card.Img
+                    src={prod.imagen}
+                    alt={prod.nombre}
                     style={{
-                      backgroundColor: "#9b7cff",
-                      border: "none",
-                      borderRadius: "10px",
-                      padding: "8px 14px",
-                      color: "white",
-                      cursor: "pointer",
-                      transition: "all .25s ease"
+                      width: "100%",
+                      height: "145px",
+                      objectFit: "contain",
+                      borderRadius: "10px"
                     }}
-                  >
-                    <FaEdit /> Editar
-                  </Button>
-
-                  <Button
-                    onClick={() => handleDelete(prod.id)}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.transform = "translateY(-2px)";
-                      e.currentTarget.style.boxShadow =
-                        "0 6px 14px rgba(0,0,0,.18)";
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.transform = "translateY(0)";
-                      e.currentTarget.style.boxShadow = "none";
-                    }}
-                    style={{
-                      backgroundColor: "#f27b7b",
-                      border: "none",
-                      borderRadius: "10px",
-                      padding: "8px 14px",
-                      color: "white",
-                      cursor: "pointer",
-                      transition: "all .25s ease"
-                    }}
-                  >
-                    <FaTrash /> Eliminar
-                  </Button>
+                  />
                 </div>
-              </Card.Body>
-            </Card>
-          ))}
-        </div>
+
+                <Card.Body
+                  className="text-center d-flex flex-column"
+                  style={{ padding: "12px" }}
+                >
+                  <Card.Title
+                    style={{
+                      color: "#5f2eea",
+                      fontWeight: "700",
+                      fontSize: "1.15rem",
+                      marginBottom: "8px"
+                    }}
+                  >
+                    {prod.nombre}
+                  </Card.Title>
+
+                  <Card.Text style={{ marginBottom: "4px" }}>
+                    <strong>Precio:</strong> ${prod.precio}
+                  </Card.Text>
+
+                  <Card.Text style={{ marginBottom: "12px" }}>
+                    <strong>Stock:</strong> {prod.stock}
+                  </Card.Text>
+
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      gap: "24px",
+                      marginTop: "20px"
+                    }}
+                  >
+                    <Button
+                      onClick={() => handleEditClick(prod)}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.transform = "translateY(-2px)";
+                        e.currentTarget.style.boxShadow =
+                          "0 6px 14px rgba(0,0,0,.18)";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.transform = "translateY(0)";
+                        e.currentTarget.style.boxShadow = "none";
+                      }}
+                      style={{
+                        backgroundColor: "#9b7cff",
+                        border: "none",
+                        borderRadius: "10px",
+                        padding: "8px 14px",
+                        color: "white",
+                        cursor: "pointer",
+                        transition: "all .25s ease"
+                      }}
+                    >
+                      <FaEdit /> Editar
+                    </Button>
+
+                    <Button
+                      onClick={() => handleDelete(prod.id)}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.transform = "translateY(-2px)";
+                        e.currentTarget.style.boxShadow =
+                          "0 6px 14px rgba(0,0,0,.18)";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.transform = "translateY(0)";
+                        e.currentTarget.style.boxShadow = "none";
+                      }}
+                      style={{
+                        backgroundColor: "#f27b7b",
+                        border: "none",
+                        borderRadius: "10px",
+                        padding: "8px 14px",
+                        color: "white",
+                        cursor: "pointer",
+                        transition: "all .25s ease"
+                      }}
+                    >
+                      <FaTrash /> Eliminar
+                    </Button>
+                  </div>
+                </Card.Body>
+              </Card>
+            ))}
+          </div>
+        )}
       </Container>
     </>
   );
