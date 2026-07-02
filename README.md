@@ -1,6 +1,6 @@
 # Caja Didáctica
 
-## Proyecto Final - React
+## Entrega Final - React
 
 Caja Didáctica es un e-commerce desarrollado con React orientado a la comercialización de materiales didácticos destinados a docentes y estudiantes de profesorados.
 
@@ -44,14 +44,15 @@ Además de permitir la navegación y compra simulada de materiales didácticos, 
 * Registro e inicio de sesión mediante Firebase Authentication.
 * Ruta protegida para el acceso al panel de administración.
 * Panel de gestión con operaciones CRUD:
-
-  * Alta de productos.
-  * Modificación de productos.
-  * Eliminación de productos.
-  * Buscador de productos para facilitar la administración.
+* Alta de productos.
+* Modificación de productos.
+* Eliminación de productos.
+* Buscador de productos para facilitar la administración.
 * Carga de imágenes mediante ImgBB.
 * Diseño responsive para distintos tamaños de pantalla.
 * Optimización SEO básica utilizando React Helmet.
+* Gestión de cupones de descuento desde el panel de administración.
+* Aplicación de cupones de descuento en el carrito con recálculo automático del total.
 
 ---
 
@@ -136,10 +137,10 @@ Entre sus funcionalidades se incluyen:
 * Edición de productos.
 * Eliminación de productos.
 * Buscador para localizar rápidamente un material.
+* Gestión de cupones de descuento (alta y eliminación).
 * Actualización automática del listado luego de cada modificación.
 
 El acceso a esta sección se encuentra protegido mediante autenticación.
-
 ---
 
 ## Diseño responsive
