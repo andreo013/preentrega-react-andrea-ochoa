@@ -5,19 +5,21 @@ function FormularioProducto() {
   const [formulario, setFormulario] = useState({
     nombre: "",
     email: "",
-    consulta: ""
+    consulta: "",
   });
+
+  const [enviando, setEnviando] = useState(false);
 
   const manejarCambio = (e) => {
     const { name, value } = e.target;
 
     setFormulario({
       ...formulario,
-      [name]: value
+      [name]: value,
     });
   };
 
-  const manejarEnvio = (e) => {
+  const manejarEnvio = async (e) => {
     e.preventDefault();
 
     if (
@@ -36,20 +38,41 @@ function FormularioProducto() {
       return;
     }
 
-    toast.success("Consulta enviada correctamente.");
+    try {
+      setEnviando(true);
 
-    setFormulario({
-      nombre: "",
-      email: "",
-      consulta: ""
-    });
+      const respuesta = await fetch("https://formspree.io/f/xnjkoowl", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(formulario),
+      });
+
+      if (respuesta.ok) {
+        toast.success("Consulta enviada correctamente.");
+
+        setFormulario({
+          nombre: "",
+          email: "",
+          consulta: "",
+        });
+      } else {
+        toast.error("No se pudo enviar la consulta. Intentá nuevamente.");
+      }
+    } catch (error) {
+      toast.error("Ocurrió un error al enviar la consulta.");
+    } finally {
+      setEnviando(false);
+    }
   };
 
   const borrarFormulario = () => {
     setFormulario({
       nombre: "",
       email: "",
-      consulta: ""
+      consulta: "",
     });
   };
 
@@ -65,7 +88,7 @@ function FormularioProducto() {
         borderRadius: "16px",
         backgroundColor: "#ffffff",
         boxShadow: "0 4px 14px rgba(0,0,0,0.12)",
-        gap: "14px"
+        gap: "14px",
       }}
     >
       <h2 style={{ marginBottom: "10px" }}>Enviá tu consulta</h2>
@@ -79,7 +102,7 @@ function FormularioProducto() {
         style={{
           padding: "12px",
           borderRadius: "8px",
-          border: "1px solid #ccc"
+          border: "1px solid #ccc",
         }}
       />
 
@@ -92,7 +115,7 @@ function FormularioProducto() {
         style={{
           padding: "12px",
           borderRadius: "8px",
-          border: "1px solid #ccc"
+          border: "1px solid #ccc",
         }}
       />
 
@@ -106,7 +129,7 @@ function FormularioProducto() {
           padding: "12px",
           borderRadius: "8px",
           border: "1px solid #ccc",
-          resize: "none"
+          resize: "none",
         }}
       />
 
@@ -114,11 +137,12 @@ function FormularioProducto() {
         style={{
           display: "flex",
           justifyContent: "space-between",
-          gap: "10px"
+          gap: "10px",
         }}
       >
         <button
           type="submit"
+          disabled={enviando}
           style={{
             flex: 1,
             backgroundColor: "#28a745",
@@ -126,11 +150,12 @@ function FormularioProducto() {
             padding: "12px",
             border: "none",
             borderRadius: "8px",
-            cursor: "pointer",
-            fontWeight: "bold"
+            cursor: enviando ? "not-allowed" : "pointer",
+            fontWeight: "bold",
+            opacity: enviando ? 0.7 : 1,
           }}
         >
-          Enviar
+          {enviando ? "Enviando..." : "Enviar"}
         </button>
 
         <button
@@ -144,7 +169,7 @@ function FormularioProducto() {
             border: "none",
             borderRadius: "8px",
             cursor: "pointer",
-            fontWeight: "bold"
+            fontWeight: "bold",
           }}
         >
           Borrar
