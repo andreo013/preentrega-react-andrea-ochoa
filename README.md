@@ -28,6 +28,17 @@ Además de permitir la navegación y compra simulada de materiales didácticos, 
 
 ---
 
+## Características destacadas
+
+- Autenticación mediante Firebase Authentication.
+- Gestión de productos con Cloud Firestore.
+- Gestión de cupones de descuento.
+- Formulario de contacto funcional mediante Formspree.
+- Diseño responsive.
+
+---
+
+
 ## Funcionalidades principales
 
 * Catálogo organizado por categorías.
@@ -40,19 +51,20 @@ Además de permitir la navegación y compra simulada de materiales didácticos, 
 * Eliminación individual de productos.
 * Vaciado completo del carrito.
 * Finalización de compra simulada.
-* Formulario de contacto con validaciones y mensaje de confirmación.
+* Formulario de contacto con validaciones y envío real de consultas mediante Formspree.
 * Registro e inicio de sesión mediante Firebase Authentication.
 * Ruta protegida para el acceso al panel de administración.
-* Panel de gestión con operaciones CRUD:
+ 
+* Panel de administración para gestionar productos:
 * Alta de productos.
 * Modificación de productos.
 * Eliminación de productos.
 * Buscador de productos para facilitar la administración.
+ 
 * Carga de imágenes mediante ImgBB.
 * Diseño responsive para distintos tamaños de pantalla.
 * Optimización SEO básica utilizando React Helmet.
-* Gestión de cupones de descuento desde el panel de administración.
-* Aplicación de cupones de descuento en el carrito con recálculo automático del total.
+* Gestión y aplicación de cupones de descuento con recálculo automático del total.
 
 ---
 
@@ -68,6 +80,7 @@ Además de permitir la navegación y compra simulada de materiales didácticos, 
 * React Toastify
 * React Helmet Async
 * React Icons
+* Formspree
 * ImgBB API
 * CSS Modules
 * Vercel
@@ -113,6 +126,8 @@ npm run build
 
 El proyecto utiliza variables de entorno para proteger la configuración de Firebase y la API de ImgBB.
 
+El formulario de contacto utiliza Formspree para el envío de consultas, sin necesidad de implementar un servidor propio.
+
 Ejemplo:
 
 ```env
@@ -153,12 +168,12 @@ La aplicación fue desarrollada utilizando un diseño adaptable a distintos disp
 
 Como evolución futura del proyecto podrían incorporarse nuevas funcionalidades, tales como:
 
-* Pasarela de pago real.
+* Integración con una pasarela de pago real.
 * Gestión de pedidos.
 * Lista de favoritos.
 * Historial de compras.
 * Filtros avanzados por categoría y precio.
-* Valoraciones y comentarios de usuarios.
+* Valoraciones de productos realizadas por usuarios registrados.
 * Cupones con fecha de vencimiento, límite de usos o asociados a usuarios específicos.
 
 ---
