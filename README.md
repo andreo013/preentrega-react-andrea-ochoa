@@ -54,13 +54,11 @@ Además de permitir la navegación y compra simulada de materiales didácticos, 
 * Formulario de contacto con validaciones y envío real de consultas mediante Formspree.
 * Registro e inicio de sesión mediante Firebase Authentication.
 * Ruta protegida para el acceso al panel de administración.
- 
-* Panel de administración para gestionar productos:
+* Panel de administración para gestionar productos.
 * Alta de productos.
 * Modificación de productos.
-* Eliminación de productos.
+* Eliminación de productos. 
 * Buscador de productos para facilitar la administración.
- 
 * Carga de imágenes mediante ImgBB.
 * Diseño responsive para distintos tamaños de pantalla.
 * Optimización SEO básica utilizando React Helmet.
@@ -124,7 +122,7 @@ npm run build
 
 ## Variables de entorno
 
-El proyecto utiliza variables de entorno para proteger la configuración de Firebase y la API de ImgBB.
+El proyecto utiliza variables de entorno para almacenar la configuración de Firebase y la API de ImgBB.
 
 El formulario de contacto utiliza Formspree para el envío de consultas, sin necesidad de implementar un servidor propio.
 
